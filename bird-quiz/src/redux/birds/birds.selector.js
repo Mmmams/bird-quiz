@@ -11,3 +11,13 @@ export const selectBirdsNames = createSelector(
   [selectBirds],
   (birds) => birds.currentName
 );
+
+export const selectLevel = createSelector(
+  [selectBirds],
+  (birds) => birds.level
+);
+
+export const selectScore = createSelector(
+  [selectBirds],
+  (birds) => birds.score
+);

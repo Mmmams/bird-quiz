@@ -8,25 +8,25 @@ import { useSelector } from "react-redux";
 const BirdInfo = () => {
   const currentInfo = useSelector(selectCurrentBirdsInfo);
   return (
-    <div className="bird-info">
+    <div className="container">
       {currentInfo ? (
         <div>
-          <div className="bird-info-title">
+          <div className="bird-info">
             <img
               className="bird-img"
               alt="bird"
               src={currentInfo.photos.photo[0].url_m}
             />
+
+            <div className="title">
+              <span>title</span>
+              <span>{currentInfo.photos.photo[0].title}</span>
+            </div>
           </div>
-          <div className="title">{currentInfo.photos.photo[0].title}</div>
           <audio controls className="bird-audio"></audio>
-          <div className="discription">
-            Some text Some text Some text Some text Some text Some text Some
-            text Some text
-          </div>
         </div>
       ) : (
-        <span>Listen audio</span>
+        <div className="bird-info">Listen audio</div>
       )}
     </div>
   );

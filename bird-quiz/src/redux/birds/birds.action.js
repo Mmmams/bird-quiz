@@ -14,7 +14,21 @@ export const fetchImageFailure = (error) => ({
   payload: error,
 });
 
-export const chooseCurrentList = (data) => ({
+export const chooseCurrentList = (index) => ({
   type: birdsActionTypes.CHOOSE_CURRENT_LIST,
-  payload: data,
+  payload: index,
+});
+
+export const goNextLevelStart = () => ({
+  type: birdsActionTypes.GO_NEXT_LEVEL_START,
+});
+
+export const goNextLevelSuccess = (nextLevelInfo) => ({
+  type: birdsActionTypes.GO_NEXT_LEVEL_SUCCESS,
+  payload: nextLevelInfo,
+});
+
+export const goNextLevelFailure = (error) => ({
+  type: birdsActionTypes.goNextLevelFailure,
+  payload: error,
 });
