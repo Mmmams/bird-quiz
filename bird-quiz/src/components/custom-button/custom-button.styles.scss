@@ -1,0 +1,14 @@
+.custom-button {
+  width: 96vw;
+  background-color: rgb(125, 201, 150);
+  margin: 10px;
+  border-radius: 10px;
+  font-size: 32px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 200ms;
+  &:hover {
+    background-color: rgb(168, 235, 190);
+  }
+}

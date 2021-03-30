@@ -1,0 +1,31 @@
+.bird-info {
+  background-color: rgb(125, 201, 150);
+  border-radius: 10px;
+  flex-grow: 2;
+  display: grid;
+  grid-gap: 10px;
+  padding: 10px;
+
+  grid-template-areas:
+    "i t t"
+    "i a a"
+    "d d d";
+
+  .bird-img {
+    height: 80px;
+    grid-area: i;
+  }
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    grid-area: t;
+    margin-right: auto;
+  }
+  .bird-audio {
+    grid-area: a;
+    width: 80%;
+  }
+  .discription {
+    grid-area: d;
+  }
+}
