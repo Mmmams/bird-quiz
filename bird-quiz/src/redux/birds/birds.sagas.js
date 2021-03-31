@@ -1,6 +1,7 @@
-import { takeLatest, put, all, call } from "redux-saga/effects";
+import { takeLatest, put, all, call, select } from "redux-saga/effects";
 
 import birdsActionTypes from "./birds.types";
+import { selectLevel } from "./birds.selector";
 
 import {
   fetchImageFailure,
@@ -61,213 +62,172 @@ export function* onNextLevel() {
 }
 
 export function* goNextLevel() {
-  try {
-    console.log("hh");
-    const data = [];
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=зяблик`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=грач`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=галка`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=дрозд`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=сорока`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=сойка`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield put(goNextLevelSuccess(data));
-  } catch (error) {
-    yield put(goNextLevelFailure(error));
-  }
-}
+  const level = yield select(selectLevel);
+  const data = [];
+  switch (level) {
+    case 1: {
+      try {
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=воробей`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=грач`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=галка`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=дрозд`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=сойка`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield put(goNextLevelSuccess(data));
+      } catch (error) {
+        yield put(goNextLevelFailure(error));
+      }
+      break;
+    }
+    case 2: {
+      try {
+        const data = [];
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=зяблик`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=клёст`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=горлица`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=дятел`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=удод`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
 
-export function* onFetchThird() {
-  yield takeLatest(birdsActionTypes.FETCH_IMAGE_START, fetchingThird);
-}
+        yield put(fetchImageSuccess(data));
+      } catch (error) {
+        yield put(fetchImageFailure(error));
+      }
+      break;
+    }
+    case 3: {
+      try {
+        const data = [];
 
-export function* fetchingThird() {
-  try {
-    const data = [];
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=зяблик`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=клёст`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=горлица`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=дятел`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=удод`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=стриж`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield put(fetchImageSuccess(data));
-  } catch (error) {
-    yield put(fetchImageFailure(error));
-  }
-}
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=соловей`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=скворец`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
 
-export function* onFetchFour() {
-  yield takeLatest(birdsActionTypes.FETCH_IMAGE_START, fetchingFour);
-}
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=щегол`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield put(fetchImageSuccess(data));
+      } catch (error) {
+        yield put(fetchImageFailure(error));
+      }
+      break;
+    }
+    case 4: {
+      try {
+        const data = [];
 
-export function* fetchingFour() {
-  try {
-    const data = [];
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=жаворонок`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=соловей`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=скворец`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=иволга`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=свиристель`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=щегол`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield put(fetchImageSuccess(data));
-  } catch (error) {
-    yield put(fetchImageFailure(error));
-  }
-}
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=коршун`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=лунь`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=сокол`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=ястреб`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=филин`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield put(fetchImageSuccess(data));
+      } catch (error) {
+        yield put(fetchImageFailure(error));
+      }
+      break;
+    }
+    case 5: {
+      try {
+        const data = [];
 
-export function* onFetchFive() {
-  yield takeLatest(birdsActionTypes.FETCH_IMAGE_START, fetchingFive);
-}
-
-export function* fetchingFive() {
-  try {
-    const data = [];
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=орёл`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=коршун`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=лунь`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=сокол`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=ястреб`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=филин`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield put(fetchImageSuccess(data));
-  } catch (error) {
-    yield put(fetchImageFailure(error));
-  }
-}
-
-export function* onFetchSix() {
-  yield takeLatest(birdsActionTypes.FETCH_IMAGE_START, fetchingSix);
-}
-
-export function* fetchingSix() {
-  try {
-    const data = [];
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=альбатрос`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=олуша`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=буревестник`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=пеликан`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=пингвин`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=чайка`
-    )
-      .then((response) => response.json())
-      .then((value) => data.push(value));
-    yield put(fetchImageSuccess(data));
-  } catch (error) {
-    yield put(fetchImageFailure(error));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=олуша`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=буревестник`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=пеликан`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=пингвин`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=чайка`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield put(fetchImageSuccess(data));
+      } catch (error) {
+        yield put(fetchImageFailure(error));
+      }
+      break;
+    }
   }
 }

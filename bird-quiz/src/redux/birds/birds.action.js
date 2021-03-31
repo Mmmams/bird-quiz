@@ -32,3 +32,22 @@ export const goNextLevelFailure = (error) => ({
   type: birdsActionTypes.goNextLevelFailure,
   payload: error,
 });
+
+export const cleanBirdInfo = () => ({
+  type: birdsActionTypes.CLEAN_BIRD_INFO,
+  payload: [],
+});
+
+export const changeNameList = (level) => ({
+  type: birdsActionTypes.CHANGE_NAME_LIST,
+  payload: level,
+});
+
+export const increaseLevel = () => ({
+  type: birdsActionTypes.INCREASE_LEVEL,
+});
+
+export const increaseScore = (score) => ({
+  type: birdsActionTypes.INCREASE_SCORE,
+  payload: score,
+});

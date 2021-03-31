@@ -1,5 +1,3 @@
-import React, { useEffect } from "react";
-
 import "./information.styles.scss";
 
 import { selectCurrentBirdsInfo } from "../../redux/birds/birds.selector";
