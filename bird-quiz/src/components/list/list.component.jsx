@@ -3,7 +3,10 @@ import React from "react";
 import "./list.styles.scss";
 
 import { selectBirdsNames } from "../../redux/birds/birds.selector";
-import { chooseCurrentList } from "../../redux/birds/birds.action";
+import {
+  chooseCurrentList,
+  chooseCurrentTitle,
+} from "../../redux/birds/birds.action";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -13,6 +16,7 @@ const BirdsList = () => {
 
   const handleChooseList = (index) => {
     dispatch(chooseCurrentList(index));
+    dispatch(chooseCurrentTitle(index));
   };
 
   return (
@@ -34,7 +38,7 @@ const BirdsList = () => {
                 fill="white"
               ></circle>
             </svg>
-            <span>{name}</span>
+            <span>{name[0]}</span>
           </li>
         ))}
       </ul>

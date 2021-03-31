@@ -21,3 +21,8 @@ export const selectScore = createSelector(
   [selectBirds],
   (birds) => birds.score
 );
+
+export const selectTitle = createSelector(
+  [selectBirds],
+  (birds) => birds.currentTitle
+);

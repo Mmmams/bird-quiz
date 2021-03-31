@@ -15,12 +15,24 @@
   .bird-img {
     height: 150px;
   }
-  .title {
+  .title-container {
     display: flex;
     margin-left: 30px;
     flex-direction: column;
-    font-size: 24px;
-    font-weight: bold;
+    align-items: flex-start;
+    text-align: left;
+    max-width: 400px;
+
+    .title {
+      font-size: 34px;
+      margin: 5px;
+      font-weight: bolder;
+
+      .sub-title {
+        font-size: 16px;
+        width: 300px;
+      }
+    }
   }
 }
 .bird-audio {

@@ -51,3 +51,8 @@ export const increaseScore = (score) => ({
   type: birdsActionTypes.INCREASE_SCORE,
   payload: score,
 });
+
+export const chooseCurrentTitle = (index) => ({
+  type: birdsActionTypes.CHOOSE_CURRENT_TITLE,
+  payload: index,
+});
