@@ -1,6 +1,7 @@
 import "./information.styles.scss";
 
 import {
+  selectAudio,
   selectCurrentBirdsInfo,
   selectTitle,
 } from "../../redux/birds/birds.selector";
@@ -8,6 +9,7 @@ import { useSelector } from "react-redux";
 
 const BirdInfo = () => {
   const currentInfo = useSelector(selectCurrentBirdsInfo);
+  const audio = useSelector(selectAudio);
   const title = useSelector(selectTitle);
   return (
     <div className="container">
@@ -25,7 +27,7 @@ const BirdInfo = () => {
               <div className="sub-title">{title[1]}</div>
             </div>
           </div>
-          <audio controls className="bird-audio"></audio>
+          <audio controls className="bird-audio" src={audio}></audio>
         </div>
       ) : (
         <div className="bird-info">Listen audio</div>

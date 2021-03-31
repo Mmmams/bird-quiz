@@ -56,3 +56,26 @@ export const chooseCurrentTitle = (index) => ({
   type: birdsActionTypes.CHOOSE_CURRENT_TITLE,
   payload: index,
 });
+
+export const chooseCurrentAudio = (index) => ({
+  type: birdsActionTypes.CHOOSE_CURRENT_AUDIO,
+  payload: index,
+});
+
+export const changeAudioList = (level) => ({
+  type: birdsActionTypes.CHANGE_AUDIO_LIST,
+  payload: level,
+});
+
+export const recieveRightAnswer = () => ({
+  type: birdsActionTypes.RECIEVE_RIGHT_ANSWER,
+});
+
+export const resetAnser = () => ({
+  type: birdsActionTypes.RESET_ANSWER,
+});
+
+export const getRandom = (value) => ({
+  type: birdsActionTypes.GET_RANDOM,
+  payload: value,
+});

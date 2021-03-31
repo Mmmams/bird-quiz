@@ -1,11 +1,12 @@
 import { takeLatest, put, all, call, select } from "redux-saga/effects";
 
 import birdsActionTypes from "./birds.types";
-import { selectLevel } from "./birds.selector";
-
+import { selectLevel, selectBirdsNames } from "./birds.selector";
+import { getRandomValue } from "../../utils";
 import {
   fetchImageFailure,
   fetchImageSuccess,
+  getRandom,
   goNextLevelFailure,
   goNextLevelSuccess,
 } from "./birds.action";
@@ -21,6 +22,9 @@ export function* onFetchImageStart() {
 export function* fetchingImage() {
   try {
     const data = [];
+    const birdsLength = yield select(selectBirdsNames);
+    const randomValue = yield getRandomValue(birdsLength.length);
+
     yield fetch(
       `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=ворон`
     )
@@ -51,7 +55,9 @@ export function* fetchingImage() {
     )
       .then((response) => response.json())
       .then((value) => data.push(value));
+
     yield put(fetchImageSuccess(data));
+    yield put(getRandom(randomValue));
   } catch (error) {
     yield put(fetchImageFailure(error));
   }
@@ -64,6 +70,8 @@ export function* onNextLevel() {
 export function* goNextLevel() {
   const level = yield select(selectLevel);
   const data = [];
+  const birdsLength = yield select(selectBirdsNames);
+  const randomValue = yield getRandomValue(birdsLength.length);
   switch (level) {
     case 1: {
       try {
@@ -93,6 +101,7 @@ export function* goNextLevel() {
           .then((response) => response.json())
           .then((value) => data.push(value));
         yield put(goNextLevelSuccess(data));
+        yield put(getRandom(randomValue));
       } catch (error) {
         yield put(goNextLevelFailure(error));
       }
@@ -101,6 +110,8 @@ export function* goNextLevel() {
     case 2: {
       try {
         const data = [];
+        const birdsLength = yield select(selectBirdsNames);
+        const randomValue = yield getRandomValue(birdsLength.length);
         yield fetch(
           `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=зяблик`
         )
@@ -128,6 +139,7 @@ export function* goNextLevel() {
           .then((value) => data.push(value));
 
         yield put(fetchImageSuccess(data));
+        yield put(getRandom(randomValue));
       } catch (error) {
         yield put(fetchImageFailure(error));
       }
@@ -136,7 +148,8 @@ export function* goNextLevel() {
     case 3: {
       try {
         const data = [];
-
+        const birdsLength = yield select(selectBirdsNames);
+        const randomValue = yield getRandomValue(birdsLength.length);
         yield fetch(
           `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=соловей`
         )
@@ -154,6 +167,7 @@ export function* goNextLevel() {
           .then((response) => response.json())
           .then((value) => data.push(value));
         yield put(fetchImageSuccess(data));
+        yield put(getRandom(randomValue));
       } catch (error) {
         yield put(fetchImageFailure(error));
       }
@@ -162,7 +176,8 @@ export function* goNextLevel() {
     case 4: {
       try {
         const data = [];
-
+        const birdsLength = yield select(selectBirdsNames);
+        const randomValue = yield getRandomValue(birdsLength.length);
         yield fetch(
           `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=коршун`
         )
@@ -189,6 +204,7 @@ export function* goNextLevel() {
           .then((response) => response.json())
           .then((value) => data.push(value));
         yield put(fetchImageSuccess(data));
+        yield put(getRandom(randomValue));
       } catch (error) {
         yield put(fetchImageFailure(error));
       }
@@ -197,7 +213,8 @@ export function* goNextLevel() {
     case 5: {
       try {
         const data = [];
-
+        const birdsLength = yield select(selectBirdsNames);
+        const randomValue = yield getRandomValue(birdsLength.length);
         yield fetch(
           `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=олуша`
         )
@@ -224,6 +241,7 @@ export function* goNextLevel() {
           .then((response) => response.json())
           .then((value) => data.push(value));
         yield put(fetchImageSuccess(data));
+        yield put(getRandom(randomValue));
       } catch (error) {
         yield put(fetchImageFailure(error));
       }

@@ -11,6 +11,8 @@ import {
   changeNameList,
   increaseLevel,
   increaseScore,
+  changeAudioList,
+  resetAnser,
 } from "../../redux/birds/birds.action";
 
 const CustomButton = () => {
@@ -23,6 +25,8 @@ const CustomButton = () => {
     dispatch(chooseCurrentList(null));
     dispatch(cleanBirdInfo());
     dispatch(changeNameList(level));
+    dispatch(changeAudioList(level));
+    dispatch(resetAnser());
     dispatch(goNextLevelStart());
   };
 

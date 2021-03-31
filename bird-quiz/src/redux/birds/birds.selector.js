@@ -26,3 +26,18 @@ export const selectTitle = createSelector(
   [selectBirds],
   (birds) => birds.currentTitle
 );
+
+export const selectAudio = createSelector(
+  [selectBirds],
+  (birds) => birds.currentAudio
+);
+
+export const selectAudioList = createSelector(
+  [selectBirds],
+  (birds) => birds.currentAudioList
+);
+
+export const selectRandom = createSelector(
+  [selectBirds],
+  (birds) => birds.random
+);

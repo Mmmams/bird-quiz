@@ -2,7 +2,16 @@ import React from "react";
 
 import "./qustion.styles.scss";
 
+import {
+  selectRandom,
+  selectAudioList,
+} from "../../redux/birds/birds.selector";
+import { useSelector } from "react-redux";
+
 const Question = () => {
+  const audioList = useSelector(selectAudioList);
+  const randomVal = useSelector(selectRandom);
+  console.log(audioList + " " + randomVal);
   return (
     <div className="question">
       <div className="question-image">
@@ -13,7 +22,11 @@ const Question = () => {
       </div>
       <div className="question-data">
         <div className="name">******</div>
-        <audio className="question-audio" controls></audio>
+        <audio
+          className="question-audio"
+          controls
+          src={audioList[randomVal]}
+        ></audio>
       </div>
     </div>
   );

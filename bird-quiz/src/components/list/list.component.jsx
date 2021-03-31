@@ -2,10 +2,15 @@ import React from "react";
 
 import "./list.styles.scss";
 
-import { selectBirdsNames } from "../../redux/birds/birds.selector";
+import {
+  selectBirdsNames,
+  selectRandom,
+} from "../../redux/birds/birds.selector";
 import {
   chooseCurrentList,
   chooseCurrentTitle,
+  chooseCurrentAudio,
+  recieveRightAnswer,
 } from "../../redux/birds/birds.action";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -13,10 +18,18 @@ import { useDispatch, useSelector } from "react-redux";
 const BirdsList = () => {
   const dispatch = useDispatch();
   const birds = useSelector(selectBirdsNames);
+  const random = useSelector(selectRandom);
 
   const handleChooseList = (index) => {
+    if (random === index) {
+      dispatch(recieveRightAnswer());
+      alert("right answer");
+    } else {
+      alert("wrong answer");
+    }
     dispatch(chooseCurrentList(index));
     dispatch(chooseCurrentTitle(index));
+    dispatch(chooseCurrentAudio(index));
   };
 
   return (
