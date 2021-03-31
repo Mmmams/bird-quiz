@@ -41,3 +41,8 @@ export const selectRandom = createSelector(
   [selectBirds],
   (birds) => birds.random
 );
+
+export const selectAnswered = createSelector(
+  [selectBirds],
+  (birds) => birds.answered
+);

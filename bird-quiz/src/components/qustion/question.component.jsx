@@ -5,23 +5,33 @@ import "./qustion.styles.scss";
 import {
   selectRandom,
   selectAudioList,
+  selectAnswered,
+  selectCurrentBirdsInfo,
+  selectTitle,
 } from "../../redux/birds/birds.selector";
 import { useSelector } from "react-redux";
 
 const Question = () => {
   const audioList = useSelector(selectAudioList);
   const randomVal = useSelector(selectRandom);
-  console.log(audioList + " " + randomVal);
+  const answered = useSelector(selectAnswered);
+  const currentInfo = useSelector(selectCurrentBirdsInfo);
+  const title = useSelector(selectTitle);
   return (
     <div className="question">
-      <div className="question-image">
+      <div>
         <img
+          className="question-image"
           alt="unknown-bird"
-          src="https://upload.wikimedia.org/wikipedia/ru/f/f3/Flappy_Bird_logo.jpeg"
+          src={
+            answered
+              ? currentInfo.photos.photo[0].url_m
+              : "https://upload.wikimedia.org/wikipedia/ru/f/f3/Flappy_Bird_logo.jpeg"
+          }
         />
       </div>
       <div className="question-data">
-        <div className="name">******</div>
+        <div className="name">{answered ? title[0] : "******"}</div>
         <audio
           className="question-audio"
           controls

@@ -1,6 +1,6 @@
 .custom-button {
   width: 96vw;
-  background-color: rgb(125, 201, 150);
+  background-color: rgb(93, 196, 127);
   margin: 10px;
   border-radius: 10px;
   font-size: 28px;
@@ -9,6 +9,20 @@
   cursor: pointer;
   transition: 200ms;
   &:hover {
-    background-color: rgb(168, 235, 190);
+    background-color: rgb(31, 177, 79);
+  }
+}
+
+.blockedBtn {
+  background-color: rgb(195, 211, 200);
+  color: darkgrey;
+  width: 96vw;
+  margin: 10px;
+  border-radius: 10px;
+  font-size: 28px;
+  border: none;
+  outline: none;
+  &:hover {
+    background-color: rgb(195, 211, 200);
   }
 }

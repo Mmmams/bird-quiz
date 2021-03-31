@@ -41,7 +41,7 @@ const BirdsList = () => {
             key={index}
             onClick={() => handleChooseList(index)}
           >
-            <svg className="options_block--color" width="14" height="14">
+            <svg className="options_block" width="14" height="14">
               <circle
                 cx="7"
                 cy="7"
