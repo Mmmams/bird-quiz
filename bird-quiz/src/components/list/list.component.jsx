@@ -20,12 +20,14 @@ const BirdsList = () => {
   const birds = useSelector(selectBirdsNames);
   const random = useSelector(selectRandom);
 
-  const handleChooseList = (index) => {
+  const handleChooseList = (event, index) => {
     if (random === index) {
       dispatch(recieveRightAnswer());
-      alert("right answer");
+      event.target.childNodes[0].childNodes[0].attributes[5].nodeValue =
+        "green";
     } else {
-      alert("wrong answer");
+      console.log(event);
+      event.target.childNodes[0].childNodes[0].attributes[5].nodeValue = "red";
     }
     dispatch(chooseCurrentList(index));
     dispatch(chooseCurrentTitle(index));
@@ -39,7 +41,7 @@ const BirdsList = () => {
           <li
             className="list"
             key={index}
-            onClick={() => handleChooseList(index)}
+            onClick={(event) => handleChooseList(event, index)}
           >
             <svg className="options_block" width="14" height="14">
               <circle
