@@ -22,6 +22,7 @@ const birdsActionTypes = {
   DECREASE_EXTRA_SCORE: "DECREASE_EXTRA_SCORE",
   RESET_EXTRA_SCORE: "RESET_EXTRA_SCORE",
   END_GAME: "END_GAME",
+  RESET_GAME: "RESET_GAME",
 };
 
 export default birdsActionTypes;

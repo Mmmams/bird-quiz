@@ -90,3 +90,7 @@ export const resetExtraScore = () => ({
 export const endGame = () => ({
   type: birdsActionTypes.END_GAME,
 });
+
+export const reestGame = () => ({
+  type: birdsActionTypes.RESET_GAME,
+});
