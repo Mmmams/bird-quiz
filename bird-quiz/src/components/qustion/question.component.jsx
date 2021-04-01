@@ -6,8 +6,9 @@ import {
   selectRandom,
   selectAudioList,
   selectAnswered,
-  selectCurrentBirdsInfo,
   selectTitle,
+  selectBirdsInfo,
+  selectBirdsNames,
 } from "../../redux/birds/birds.selector";
 import { useSelector } from "react-redux";
 
@@ -15,8 +16,9 @@ const Question = () => {
   const audioList = useSelector(selectAudioList);
   const randomVal = useSelector(selectRandom);
   const answered = useSelector(selectAnswered);
-  const currentInfo = useSelector(selectCurrentBirdsInfo);
+  const nameList = useSelector(selectBirdsNames);
   const title = useSelector(selectTitle);
+  const birdsInfo = useSelector(selectBirdsInfo);
   return (
     <div className="question">
       <div>
@@ -25,13 +27,15 @@ const Question = () => {
           alt="unknown-bird"
           src={
             answered
-              ? currentInfo.photos.photo[0].url_m
+              ? birdsInfo[randomVal].photos.photo[0].url_m
               : "https://upload.wikimedia.org/wikipedia/ru/f/f3/Flappy_Bird_logo.jpeg"
           }
         />
       </div>
       <div className="question-data">
-        <div className="name">{answered ? title[0] : "******"}</div>
+        <div className="name">
+          {answered ? nameList[randomVal][0] : "******"}
+        </div>
         <audio
           className="question-audio"
           controls

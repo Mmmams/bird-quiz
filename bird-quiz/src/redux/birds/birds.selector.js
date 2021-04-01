@@ -46,3 +46,8 @@ export const selectAnswered = createSelector(
   [selectBirds],
   (birds) => birds.answered
 );
+
+export const selectBirdsInfo = createSelector(
+  [selectBirds],
+  (birds) => birds.birdsInfo
+);

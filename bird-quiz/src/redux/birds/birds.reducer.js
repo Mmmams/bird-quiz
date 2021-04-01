@@ -273,7 +273,7 @@ const birdReducer = (state = INITIAL_STATE, action) => {
     case birdsActionTypes.CLEAN_BIRD_INFO:
       return {
         ...state,
-        birdsInfo: action.payload,
+        birdsInfo: [],
       };
     case birdsActionTypes.CHANGE_NAME_LIST:
       return {

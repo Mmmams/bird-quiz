@@ -2,7 +2,6 @@ import React from "react";
 
 import "./custom-button.styles.scss";
 
-import { getRandomValue } from "../../utils";
 import { selectLevel, selectAnswered } from "../../redux/birds/birds.selector";
 import { useDispatch, useSelector } from "react-redux";
 import {

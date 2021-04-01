@@ -1,14 +1,17 @@
 .bird-list-container {
   flex-grow: 1;
-}
-.bird-list {
-  display: flex;
-  flex-direction: column;
-
   border-radius: 10px;
   background-color: rgb(125, 201, 150);
   margin-right: 20px;
   margin-bottom: 20px;
+
+  .loading-title {
+    margin: 15px;
+  }
+}
+.bird-list {
+  display: flex;
+  flex-direction: column;
 
   .list {
     padding: 10px;

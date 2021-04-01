@@ -35,7 +35,6 @@ export const goNextLevelFailure = (error) => ({
 
 export const cleanBirdInfo = () => ({
   type: birdsActionTypes.CLEAN_BIRD_INFO,
-  payload: [],
 });
 
 export const changeNameList = (level) => ({

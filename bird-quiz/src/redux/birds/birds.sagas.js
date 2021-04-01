@@ -138,10 +138,10 @@ export function* goNextLevel() {
           .then((response) => response.json())
           .then((value) => data.push(value));
 
-        yield put(fetchImageSuccess(data));
+        yield put(goNextLevelSuccess(data));
         yield put(getRandom(randomValue));
       } catch (error) {
-        yield put(fetchImageFailure(error));
+        yield put(goNextLevelFailure(error));
       }
       break;
     }
@@ -166,10 +166,10 @@ export function* goNextLevel() {
         )
           .then((response) => response.json())
           .then((value) => data.push(value));
-        yield put(fetchImageSuccess(data));
+        yield put(goNextLevelSuccess(data));
         yield put(getRandom(randomValue));
       } catch (error) {
-        yield put(fetchImageFailure(error));
+        yield put(goNextLevelFailure(error));
       }
       break;
     }
@@ -203,10 +203,10 @@ export function* goNextLevel() {
         )
           .then((response) => response.json())
           .then((value) => data.push(value));
-        yield put(fetchImageSuccess(data));
+        yield put(goNextLevelSuccess(data));
         yield put(getRandom(randomValue));
       } catch (error) {
-        yield put(fetchImageFailure(error));
+        yield put(goNextLevelFailure(error));
       }
       break;
     }
@@ -240,10 +240,10 @@ export function* goNextLevel() {
         )
           .then((response) => response.json())
           .then((value) => data.push(value));
-        yield put(fetchImageSuccess(data));
+        yield put(goNextLevelSuccess(data));
         yield put(getRandom(randomValue));
       } catch (error) {
-        yield put(fetchImageFailure(error));
+        yield put(goNextLevelFailure(error));
       }
       break;
     }
