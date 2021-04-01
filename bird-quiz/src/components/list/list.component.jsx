@@ -27,20 +27,19 @@ const BirdsList = () => {
   const extraScore = useSelector(selecrExtraScore);
   const handleChooseList = (event, index) => {
     if (random === index) {
+      birds[index][2] = "green";
       dispatch(recieveRightAnswer());
       dispatch(increaseScore(extraScore));
-      event.currentTarget.childNodes[0].childNodes[0].attributes[5].nodeValue =
-        "green";
     } else {
-      dispatch(decreaseExtraScore());
-      event.currentTarget.childNodes[0].childNodes[0].attributes[5].nodeValue =
-        "red";
+      if (birds[index][2] !== "red") {
+        dispatch(decreaseExtraScore());
+      }
+      birds[index][2] = "red";
     }
     dispatch(chooseCurrentList(index));
     dispatch(chooseCurrentTitle(index));
     dispatch(chooseCurrentAudio(index));
   };
-
   return (
     <div className="bird-list-container">
       {birdsInfo.length ? (
@@ -59,7 +58,7 @@ const BirdsList = () => {
                     r="6"
                     stroke="black"
                     strokeWidth="1"
-                    fill="white"
+                    fill={name[2]}
                   ></circle>
                 </svg>
                 <span>{name[0]}</span>
