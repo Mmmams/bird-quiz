@@ -1,5 +1,5 @@
-import { endGame } from "./birds.action";
 import birdsActionTypes from "./birds.types";
+import { updateCircleColor } from "../../utils";
 
 const INITIAL_STATE = {
   endGame: false,
@@ -292,6 +292,7 @@ const INITIAL_STATE = {
 };
 
 const birdReducer = (state = INITIAL_STATE, action) => {
+  console.log(action.payload);
   switch (action.type) {
     case birdsActionTypes.FETCH_IMAGE_SUCCESS:
       return {
@@ -373,6 +374,17 @@ const birdReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         endGame: !state.endGame,
+      };
+    case birdsActionTypes.CHANGE_COLOR:
+      return {
+        ...state,
+        currentName: [
+          ...state.currentName.map((item, itemIdx) => {
+            return itemIdx != action.payload.index
+              ? item
+              : updateCircleColor(item, action.payload.color);
+          }),
+        ],
       };
     case birdsActionTypes.RESET_GAME:
       return {

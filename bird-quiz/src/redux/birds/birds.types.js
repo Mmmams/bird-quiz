@@ -23,7 +23,7 @@ const birdsActionTypes = {
   RESET_EXTRA_SCORE: "RESET_EXTRA_SCORE",
   END_GAME: "END_GAME",
   RESET_GAME: "RESET_GAME",
-  CHANGE_CIRCLE_COLOR: "CHANGE_CIRCLE_COLOR",
+  CHANGE_COLOR: "CHANGE_COLOR",
 };
 
 export default birdsActionTypes;

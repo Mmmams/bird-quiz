@@ -15,6 +15,7 @@ import {
   recieveRightAnswer,
   decreaseExtraScore,
   increaseScore,
+  changeColor,
 } from "../../redux/birds/birds.action";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -27,14 +28,14 @@ const BirdsList = () => {
   const extraScore = useSelector(selecrExtraScore);
   const handleChooseList = (event, index) => {
     if (random === index) {
-      birds[index][2] = "green";
+      dispatch(changeColor(index, "green"));
       dispatch(recieveRightAnswer());
       dispatch(increaseScore(extraScore));
     } else {
       if (birds[index][2] !== "red") {
         dispatch(decreaseExtraScore());
       }
-      birds[index][2] = "red";
+      dispatch(changeColor(index, "red"));
     }
     dispatch(chooseCurrentList(index));
     dispatch(chooseCurrentTitle(index));
