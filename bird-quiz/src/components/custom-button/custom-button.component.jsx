@@ -10,9 +10,10 @@ import {
   chooseCurrentList,
   changeNameList,
   increaseLevel,
-  increaseScore,
   changeAudioList,
-  resetAnser,
+  resetAnswer,
+  endGame,
+  resetExtraScore,
 } from "../../redux/birds/birds.action";
 
 const CustomButton = () => {
@@ -22,14 +23,18 @@ const CustomButton = () => {
 
   const handleGoNextLevel = () => {
     if (answered) {
-      dispatch(increaseScore(5));
-      dispatch(increaseLevel());
-      dispatch(chooseCurrentList(null));
-      dispatch(cleanBirdInfo());
-      dispatch(changeNameList(level));
-      dispatch(changeAudioList(level));
-      dispatch(resetAnser());
-      dispatch(goNextLevelStart());
+      if (level === 5) {
+        dispatch(endGame());
+      } else {
+        dispatch(increaseLevel());
+        dispatch(chooseCurrentList(null));
+        dispatch(cleanBirdInfo());
+        dispatch(changeNameList(level));
+        dispatch(changeAudioList(level));
+        dispatch(resetAnswer());
+        dispatch(goNextLevelStart());
+        dispatch(resetExtraScore());
+      }
     }
   };
 

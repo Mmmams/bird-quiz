@@ -51,3 +51,13 @@ export const selectBirdsInfo = createSelector(
   [selectBirds],
   (birds) => birds.birdsInfo
 );
+
+export const selecrExtraScore = createSelector(
+  [selectBirds],
+  (birds) => birds.extraScore
+);
+
+export const selectEndGame = createSelector(
+  [selectBirds],
+  (birds) => birds.endGame
+);

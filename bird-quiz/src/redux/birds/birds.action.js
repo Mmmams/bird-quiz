@@ -70,11 +70,23 @@ export const recieveRightAnswer = () => ({
   type: birdsActionTypes.RECIEVE_RIGHT_ANSWER,
 });
 
-export const resetAnser = () => ({
+export const resetAnswer = () => ({
   type: birdsActionTypes.RESET_ANSWER,
 });
 
 export const getRandom = (value) => ({
   type: birdsActionTypes.GET_RANDOM,
   payload: value,
+});
+
+export const decreaseExtraScore = () => ({
+  type: birdsActionTypes.DECREASE_EXTRA_SCORE,
+});
+
+export const resetExtraScore = () => ({
+  type: birdsActionTypes.RESET_EXTRA_SCORE,
+});
+
+export const endGame = () => ({
+  type: birdsActionTypes.END_GAME,
 });

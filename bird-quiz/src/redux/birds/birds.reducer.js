@@ -1,6 +1,8 @@
 import birdsActionTypes from "./birds.types";
 
 const INITIAL_STATE = {
+  endGame: false,
+  extraScore: 5,
   random: null,
   answered: false,
   score: 0,
@@ -319,6 +321,22 @@ const birdReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         random: action.payload,
+      };
+    case birdsActionTypes.DECREASE_EXTRA_SCORE:
+      return {
+        ...state,
+        extraScore:
+          state.extraScore > 0 ? state.extraScore - 1 : state.extraScore,
+      };
+    case birdsActionTypes.RESET_EXTRA_SCORE:
+      return {
+        ...state,
+        extraScore: 5,
+      };
+    case birdsActionTypes.END_GAME:
+      return {
+        ...state,
+        endGame: true,
       };
     default:
       return {

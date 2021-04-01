@@ -6,12 +6,15 @@ import {
   selectBirdsNames,
   selectRandom,
   selectCurrentBirdsInfo,
+  selecrExtraScore,
 } from "../../redux/birds/birds.selector";
 import {
   chooseCurrentList,
   chooseCurrentTitle,
   chooseCurrentAudio,
   recieveRightAnswer,
+  decreaseExtraScore,
+  increaseScore,
 } from "../../redux/birds/birds.action";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -21,13 +24,16 @@ const BirdsList = () => {
   const birds = useSelector(selectBirdsNames);
   const random = useSelector(selectRandom);
   let birdsInfo = useSelector(selectCurrentBirdsInfo);
+  const extraScore = useSelector(selecrExtraScore);
 
   const handleChooseList = (event, index) => {
     if (random === index) {
       dispatch(recieveRightAnswer());
+      dispatch(increaseScore(extraScore));
       event.currentTarget.childNodes[0].childNodes[0].attributes[5].nodeValue =
         "green";
     } else {
+      dispatch(decreaseExtraScore());
       event.currentTarget.childNodes[0].childNodes[0].attributes[5].nodeValue =
         "red";
     }
