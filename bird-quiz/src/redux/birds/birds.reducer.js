@@ -11,7 +11,8 @@ const INITIAL_STATE = {
   currentInfo: null,
   currentTitle: null,
   currentAudio: null,
-  birdsInfo: null,
+  birdsInfo: [],
+
   birdsAudio: {
     0: [
       "https://www.xeno-canto.org/sounds/uploaded/XIQVMQVUPP/XC518684-Grands%20corbeaux%2009012020%20Suzon.mp3",

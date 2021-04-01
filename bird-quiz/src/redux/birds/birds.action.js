@@ -94,3 +94,8 @@ export const endGame = () => ({
 export const reestGame = () => ({
   type: birdsActionTypes.RESET_GAME,
 });
+
+export const changeCircleColor = (color) => ({
+  type: birdsActionTypes.CHANGE_CIRCLE_COLOR,
+  payload: color,
+});

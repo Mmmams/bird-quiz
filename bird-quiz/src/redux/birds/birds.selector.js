@@ -61,3 +61,8 @@ export const selectEndGame = createSelector(
   [selectBirds],
   (birds) => birds.endGame
 );
+
+export const selectColor = createSelector(
+  [selectBirds],
+  (birds) => birds.circleColor
+);

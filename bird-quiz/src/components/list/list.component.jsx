@@ -5,8 +5,8 @@ import "./list.styles.scss";
 import {
   selectBirdsNames,
   selectRandom,
-  selectCurrentBirdsInfo,
   selecrExtraScore,
+  selectBirdsInfo,
 } from "../../redux/birds/birds.selector";
 import {
   chooseCurrentList,
@@ -23,9 +23,8 @@ const BirdsList = () => {
   const dispatch = useDispatch();
   const birds = useSelector(selectBirdsNames);
   const random = useSelector(selectRandom);
-  let birdsInfo = useSelector(selectCurrentBirdsInfo);
+  const birdsInfo = useSelector(selectBirdsInfo);
   const extraScore = useSelector(selecrExtraScore);
-
   const handleChooseList = (event, index) => {
     if (random === index) {
       dispatch(recieveRightAnswer());
@@ -44,7 +43,7 @@ const BirdsList = () => {
 
   return (
     <div className="bird-list-container">
-      {true ? (
+      {birdsInfo.length ? (
         <div>
           <ul className="bird-list">
             {birds.map((name, index) => (
