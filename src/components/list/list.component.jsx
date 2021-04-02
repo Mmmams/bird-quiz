@@ -1,7 +1,6 @@
-import React from "react";
+import React, { createRef } from "react";
 
 import "./list.styles.scss";
-
 import {
   selectBirdsNames,
   selectRandom,
@@ -20,20 +19,28 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 
+import right from "../../assets/true.mp3";
+import wrong from "../../assets/wrong.mp3";
+
 const BirdsList = () => {
   const dispatch = useDispatch();
   const birds = useSelector(selectBirdsNames);
   const random = useSelector(selectRandom);
   const birdsInfo = useSelector(selectBirdsInfo);
   const extraScore = useSelector(selecrExtraScore);
+  const rightAnswerAudio = new Audio(right);
+  const wrongAnswerAudio = new Audio(wrong);
   const handleChooseList = (event, index) => {
     if (random === index) {
       dispatch(changeColor(index, "green"));
+      rightAnswerAudio.play();
       dispatch(recieveRightAnswer());
       dispatch(increaseScore(extraScore));
     } else {
       if (birds[index][2] !== "red") {
         dispatch(decreaseExtraScore());
+        console.log(wrongAnswerAudio.current);
+        wrongAnswerAudio.play();
       }
       dispatch(changeColor(index, "red"));
     }
@@ -41,6 +48,7 @@ const BirdsList = () => {
     dispatch(chooseCurrentTitle(index));
     dispatch(chooseCurrentAudio(index));
   };
+
   return (
     <div className="bird-list-container">
       {birdsInfo.length ? (

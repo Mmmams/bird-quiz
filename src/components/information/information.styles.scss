@@ -2,7 +2,6 @@
   background-color: rgb(125, 201, 150);
   border-radius: 10px;
   flex-grow: 2;
-  height: 280px;
   margin-bottom: 20px;
 }
 
@@ -17,6 +16,10 @@
     height: 150px;
     width: 150px;
     border-radius: 100%;
+    @media screen and (max-width: 400px) {
+      height: 70px;
+      width: 70px;
+    }
   }
   .title-container {
     display: flex;
@@ -30,10 +33,14 @@
       font-size: 34px;
       margin: 5px;
       font-weight: bolder;
-
-      .sub-title {
-        font-size: 16px;
-        width: 300px;
+      @media screen and (max-width: 400px) {
+        font-size: 18px;
+      }
+    }
+    .sub-title {
+      font-size: 16px;
+      @media screen and (max-width: 400px) {
+        font-size: 12px;
       }
     }
   }
@@ -41,4 +48,10 @@
 .bird-audio {
   width: 80%;
   margin: 30px;
+  @media screen and (max-width: 400px) {
+    font-size: 12px;
+    margin: 10px;
+    width: 75%;
+    margin: 10px;
+  }
 }
