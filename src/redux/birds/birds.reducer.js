@@ -403,7 +403,7 @@ const birdReducer = (state = INITIAL_STATE, action) => {
     case birdsActionTypes.RESET_EXTRA_SCORE:
       return {
         ...state,
-        extraScore: 5,
+        extraScore: 4,
       };
     case birdsActionTypes.END_GAME:
       return {
