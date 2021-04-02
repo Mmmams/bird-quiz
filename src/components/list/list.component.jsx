@@ -39,7 +39,6 @@ const BirdsList = () => {
     } else {
       if (birds[index][2] !== "red") {
         dispatch(decreaseExtraScore());
-        console.log(wrongAnswerAudio.current);
         wrongAnswerAudio.play();
       }
       dispatch(changeColor(index, "red"));
