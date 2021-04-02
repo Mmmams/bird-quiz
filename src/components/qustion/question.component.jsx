@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import "./qustion.styles.scss";
 
@@ -17,8 +17,13 @@ const Question = () => {
   const randomVal = useSelector(selectRandom);
   const answered = useSelector(selectAnswered);
   const nameList = useSelector(selectBirdsNames);
-  const title = useSelector(selectTitle);
   const birdsInfo = useSelector(selectBirdsInfo);
+
+  const currentAudio = useRef(null);
+  if (answered === true) {
+    currentAudio.current.pause();
+  }
+
   return (
     <div className="question">
       <div>
@@ -40,6 +45,7 @@ const Question = () => {
           className="question-audio"
           controls
           src={audioList[randomVal]}
+          ref={currentAudio}
         ></audio>
       </div>
     </div>

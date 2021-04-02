@@ -1,11 +1,10 @@
-import React, { createRef } from "react";
-
 import "./list.styles.scss";
 import {
   selectBirdsNames,
   selectRandom,
   selecrExtraScore,
   selectBirdsInfo,
+  selectAnswered,
 } from "../../redux/birds/birds.selector";
 import {
   chooseCurrentList,
@@ -24,6 +23,7 @@ import wrong from "../../assets/wrong.mp3";
 
 const BirdsList = () => {
   const dispatch = useDispatch();
+  const answered = useSelector(selectAnswered);
   const birds = useSelector(selectBirdsNames);
   const random = useSelector(selectRandom);
   const birdsInfo = useSelector(selectBirdsInfo);
@@ -33,15 +33,20 @@ const BirdsList = () => {
   const handleChooseList = (event, index) => {
     if (random === index) {
       dispatch(changeColor(index, "green"));
-      rightAnswerAudio.play();
+      if (answered === false) {
+        rightAnswerAudio.play();
+      }
+      console.log("Правильный ответ: " + birds[index][0]);
       dispatch(recieveRightAnswer());
       dispatch(increaseScore(extraScore));
     } else {
-      if (birds[index][2] !== "red") {
+      if (birds[index][2] !== "red" && answered === false) {
         dispatch(decreaseExtraScore());
         wrongAnswerAudio.play();
       }
-      dispatch(changeColor(index, "red"));
+      if (answered === false) {
+        dispatch(changeColor(index, "red"));
+      }
     }
     dispatch(chooseCurrentList(index));
     dispatch(chooseCurrentTitle(index));
@@ -75,7 +80,7 @@ const BirdsList = () => {
           </ul>
         </div>
       ) : (
-        <div className="bird-list-container loading-title">LOADING...</div>
+        <div className="bird-list-container loading-title">Загрузка...</div>
       )}
     </div>
   );

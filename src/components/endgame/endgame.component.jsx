@@ -18,11 +18,15 @@ const EndGame = () => {
     <div className="endgame-container">
       <div className="endgame-title">Поздравляем</div>
       <div className="endgame-subtitle">
-        Игра окончена. Общий результат {score} из 30 возможных баллов.
+        Игра окончена. Общий результат {score} из 24 возможных баллов.
       </div>
-      <button className="endgame-btn" onClick={() => handleEndGame()}>
-        Попробовать еще раз!
-      </button>
+      {score == 24 ? (
+        <div className="endgame-subtitle">Поздравляем, Вы прошли игру.</div>
+      ) : (
+        <button className="endgame-btn" onClick={() => handleEndGame()}>
+          Попробовать еще раз!
+        </button>
+      )}
     </div>
   );
 };

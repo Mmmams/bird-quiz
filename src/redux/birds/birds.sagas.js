@@ -166,6 +166,16 @@ export function* goNextLevel() {
         )
           .then((response) => response.json())
           .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=свиристель`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
+        yield fetch(
+          `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=7ecd0010d836ddcdfb59aa1364622ed5&tag_mode=all&extras=url_m&format=json&nojsoncallback=1&tags=иволга`
+        )
+          .then((response) => response.json())
+          .then((value) => data.push(value));
         yield put(goNextLevelSuccess(data));
         yield put(getRandom(randomValue));
       } catch (error) {
