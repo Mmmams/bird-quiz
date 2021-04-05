@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import right from "../../assets/true.mp3";
 import wrong from "../../assets/wrong.mp3";
+import { useEffect } from "react";
 
 const BirdsList = () => {
   const dispatch = useDispatch();
@@ -30,15 +31,20 @@ const BirdsList = () => {
   const extraScore = useSelector(selecrExtraScore);
   const rightAnswerAudio = new Audio(right);
   const wrongAnswerAudio = new Audio(wrong);
+
+  useEffect(() => {
+    console.log("Правильный ответ: " + birds[random]);
+  }, [random]);
+
   const handleChooseList = (event, index) => {
     if (random === index) {
       dispatch(changeColor(index, "green"));
       if (answered === false) {
         rightAnswerAudio.play();
+        dispatch(increaseScore(extraScore));
       }
-      console.log("Правильный ответ: " + birds[index][0]);
+
       dispatch(recieveRightAnswer());
-      dispatch(increaseScore(extraScore));
     } else {
       if (birds[index][2] !== "red" && answered === false) {
         dispatch(decreaseExtraScore());
