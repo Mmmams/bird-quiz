@@ -14,6 +14,7 @@ import {
   decreaseExtraScore,
   increaseScore,
   changeColor,
+  getRandom,
 } from "../../redux/birds/birds.action";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -26,17 +27,17 @@ const BirdsList = () => {
   const dispatch = useDispatch();
   const answered = useSelector(selectAnswered);
   const birds = useSelector(selectBirdsNames);
-  const random = 1;
+  const random = useSelector(selectRandom);
   const birdsInfo = useSelector(selectBirdsInfo);
   const extraScore = useSelector(selecrExtraScore);
   const rightAnswerAudio = new Audio(right);
   const wrongAnswerAudio = new Audio(wrong);
 
   useEffect(() => {
-    if (random || random == 0) {
+    if ((random || random === 0) && answered === false) {
       console.log("Правильный ответ: " + birds[random][0]);
     }
-  }, [random, []]);
+  }, [random]);
 
   const handleChooseList = (event, index) => {
     if (random === index) {

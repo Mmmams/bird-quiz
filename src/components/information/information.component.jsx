@@ -4,7 +4,6 @@ import {
   selectAudio,
   selectCurrentBirdsInfo,
   selectTitle,
-  selectAnswered,
 } from "../../redux/birds/birds.selector";
 import { useSelector } from "react-redux";
 
@@ -12,7 +11,6 @@ const BirdInfo = () => {
   const currentInfo = useSelector(selectCurrentBirdsInfo);
   const audio = useSelector(selectAudio);
   const title = useSelector(selectTitle);
-  const answered = useSelector(selectAnswered);
 
   return (
     <div className="container">

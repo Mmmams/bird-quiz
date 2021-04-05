@@ -415,7 +415,7 @@ const birdReducer = (state = INITIAL_STATE, action) => {
         ...state,
         currentName: [
           ...state.currentName.map((item, itemIdx) => {
-            return itemIdx != action.payload.index
+            return itemIdx !== action.payload.index
               ? item
               : updateCircleColor(item, action.payload.color);
           }),

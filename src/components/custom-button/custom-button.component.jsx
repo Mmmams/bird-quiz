@@ -13,6 +13,7 @@ import {
   changeAudioList,
   resetAnswer,
   endGame,
+  getRandom,
   resetExtraScore,
 } from "../../redux/birds/birds.action";
 
@@ -34,6 +35,7 @@ const CustomButton = () => {
         dispatch(resetAnswer());
         dispatch(goNextLevelStart());
         dispatch(resetExtraScore());
+        dispatch(getRandom(null));
       }
     }
   };

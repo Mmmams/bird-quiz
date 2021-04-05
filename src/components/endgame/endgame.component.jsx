@@ -20,7 +20,7 @@ const EndGame = () => {
       <div className="endgame-subtitle">
         Игра окончена. Общий результат {score} из 24 возможных баллов.
       </div>
-      {score == 24 ? (
+      {score === 24 ? (
         <div className="endgame-subtitle">Поздравляем, Вы прошли игру.</div>
       ) : (
         <button className="endgame-btn" onClick={() => handleEndGame()}>
