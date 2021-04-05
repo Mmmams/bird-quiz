@@ -33,7 +33,9 @@ const BirdsList = () => {
   const wrongAnswerAudio = new Audio(wrong);
 
   useEffect(() => {
-    console.log("Правильный ответ: " + birds[random]);
+    if (random) {
+      console.log("Правильный ответ: " + birds[random][0]);
+    }
   }, [random]);
 
   const handleChooseList = (event, index) => {
