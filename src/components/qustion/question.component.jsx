@@ -6,7 +6,6 @@ import {
   selectRandom,
   selectAudioList,
   selectAnswered,
-  selectTitle,
   selectBirdsInfo,
   selectBirdsNames,
 } from "../../redux/birds/birds.selector";
@@ -18,7 +17,6 @@ const Question = () => {
   const answered = useSelector(selectAnswered);
   const nameList = useSelector(selectBirdsNames);
   const birdsInfo = useSelector(selectBirdsInfo);
-
   const currentAudio = useRef(null);
   if (answered === true) {
     currentAudio.current.pause();
@@ -41,12 +39,16 @@ const Question = () => {
         <div className="name">
           {answered ? nameList[randomVal][0] : "******"}
         </div>
-        <audio
-          className="question-audio"
-          controls
-          src={audioList[randomVal]}
-          ref={currentAudio}
-        ></audio>
+        {birdsInfo.length ? (
+          <audio
+            className="question-audio"
+            controls
+            src={audioList[randomVal]}
+            ref={currentAudio}
+          ></audio>
+        ) : (
+          <div className="loading">Загрузка...</div>
+        )}
       </div>
     </div>
   );

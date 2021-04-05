@@ -26,27 +26,26 @@ const BirdsList = () => {
   const dispatch = useDispatch();
   const answered = useSelector(selectAnswered);
   const birds = useSelector(selectBirdsNames);
-  const random = useSelector(selectRandom);
+  const random = 1;
   const birdsInfo = useSelector(selectBirdsInfo);
   const extraScore = useSelector(selecrExtraScore);
   const rightAnswerAudio = new Audio(right);
   const wrongAnswerAudio = new Audio(wrong);
 
   useEffect(() => {
-    if (random) {
+    if (random || random == 0) {
       console.log("Правильный ответ: " + birds[random][0]);
     }
-  }, [random]);
+  }, [random, []]);
 
   const handleChooseList = (event, index) => {
     if (random === index) {
-      dispatch(changeColor(index, "green"));
       if (answered === false) {
+        dispatch(changeColor(index, "green"));
         rightAnswerAudio.play();
         dispatch(increaseScore(extraScore));
+        dispatch(recieveRightAnswer());
       }
-
-      dispatch(recieveRightAnswer());
     } else {
       if (birds[index][2] !== "red" && answered === false) {
         dispatch(decreaseExtraScore());
