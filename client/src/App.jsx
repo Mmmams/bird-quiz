@@ -1,9 +1,7 @@
-import "./App.css";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchImageStart } from "./redux/birds/birds.action";
-import { selectEndGame } from "./redux/birds/birds.selector";
+import "./App.css";
 
 import Header from "./components/header/header.component";
 import Main from "./components/main/main.component";
@@ -11,17 +9,37 @@ import Question from "./components/qustion/question.component";
 import CustomButton from "./components/custom-button/custom-button.component";
 import EndGame from "./components/endgame/endgame.component";
 
+import { currentBirdsArray } from "./utils.js";
+
+import {
+  fetchInfoStart,
+  setCurrentBirdArray,
+} from "./redux/birds/birds.action";
+
+import { selectLevel, selectBirdsArray } from "./redux/birds/birds.selector";
+
 function App() {
-  const endGame = useSelector(selectEndGame);
   const dispatch = useDispatch();
+
+  const level = useSelector(selectLevel);
+  const initialBirdsArray = useSelector(selectBirdsArray);
+
   useEffect(() => {
-    dispatch(fetchImageStart());
+    dispatch(fetchInfoStart());
   }, []);
+
+  useEffect(() => {
+    if (initialBirdsArray) {
+      const currentArray = currentBirdsArray(level, initialBirdsArray);
+      dispatch(setCurrentBirdArray(currentArray));
+    }
+  }, [initialBirdsArray]);
+
   return (
     <div className="App">
       <Header />
 
-      {endGame ? (
+      {false ? (
         <EndGame />
       ) : (
         <div>

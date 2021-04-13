@@ -2,12 +2,11 @@ import React from "react";
 
 import "./header.styles.scss";
 
-import { selectScore, selectLevel } from "../../redux/birds/birds.selector";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-  const score = useSelector(selectScore);
-  const level = useSelector(selectLevel);
+  const level = 0;
+  const score = 1;
   return (
     <div className="header">
       <div className="header-info">

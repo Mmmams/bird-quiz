@@ -2,14 +2,14 @@ import { createSelector } from "reselect";
 
 const selectBirds = (state) => state.birds;
 
-export const selectCurrentBirdsInfo = createSelector(
+export const selectBirdsArray = createSelector(
   [selectBirds],
-  (birds) => birds.currentInfo
+  (birds) => birds.birdsArray
 );
 
-export const selectBirdsNames = createSelector(
+export const selectCurrentBirdsArray = createSelector(
   [selectBirds],
-  (birds) => birds.currentName
+  (birds) => birds.CurrentbirdsArray
 );
 
 export const selectLevel = createSelector(
@@ -22,19 +22,9 @@ export const selectScore = createSelector(
   (birds) => birds.score
 );
 
-export const selectTitle = createSelector(
+export const selectExtraScore = createSelector(
   [selectBirds],
-  (birds) => birds.currentTitle
-);
-
-export const selectAudio = createSelector(
-  [selectBirds],
-  (birds) => birds.currentAudio
-);
-
-export const selectAudioList = createSelector(
-  [selectBirds],
-  (birds) => birds.currentAudioList
+  (birds) => birds.extraScore
 );
 
 export const selectRandom = createSelector(
@@ -44,25 +34,10 @@ export const selectRandom = createSelector(
 
 export const selectAnswered = createSelector(
   [selectBirds],
-  (birds) => birds.answered
-);
-
-export const selectBirdsInfo = createSelector(
-  [selectBirds],
-  (birds) => birds.birdsInfo
-);
-
-export const selecrExtraScore = createSelector(
-  [selectBirds],
-  (birds) => birds.extraScore
+  (birds) => birds.Answered
 );
 
 export const selectEndGame = createSelector(
   [selectBirds],
   (birds) => birds.endGame
-);
-
-export const selectColor = createSelector(
-  [selectBirds],
-  (birds) => birds.circleColor
 );

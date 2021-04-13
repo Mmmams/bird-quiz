@@ -2,9 +2,9 @@ export const getRandomValue = (max) => {
   return Math.floor(Math.random() * max);
 };
 
-export const updateCircleColor = (btn, color) => {
-  btn[2] = color;
-  return btn;
+export const currentBirdsArray = (level, initialArray) => {
+  const currentArray = initialArray.slice((level - 1) * 6, level * 6);
+  return currentArray;
 };
 
 export const audioClick = (answer) => {

@@ -19,31 +19,13 @@ import {
 
 const CustomButton = () => {
   const dispatch = useDispatch();
-  const level = useSelector(selectLevel);
-  const answered = useSelector(selectAnswered);
 
-  const handleGoNextLevel = () => {
-    if (answered) {
-      if (level === 5) {
-        dispatch(endGame());
-      } else {
-        dispatch(increaseLevel());
-        dispatch(chooseCurrentList(null));
-        dispatch(cleanBirdInfo());
-        dispatch(changeNameList(level));
-        dispatch(changeAudioList(level));
-        dispatch(resetAnswer());
-        dispatch(goNextLevelStart());
-        dispatch(resetExtraScore());
-        dispatch(getRandom(null));
-      }
-    }
-  };
+  const handleGoNextLevel = () => {};
 
   return (
     <div>
       <button
-        className={answered ? "custom-button" : "blockedBtn"}
+        className={true ? "custom-button" : "blockedBtn"}
         onClick={() => {
           handleGoNextLevel();
         }}
