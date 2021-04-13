@@ -18,3 +18,43 @@ export const setCurrentBirdArray = (currentBirdArray) => ({
   type: birdsActionTypes.SET_CURRENT_BIRD_ARRAY,
   payload: currentBirdArray,
 });
+
+export const setRandomValue = (randomValue) => ({
+  type: birdsActionTypes.SET_RANDOM_VALUE,
+  payload: randomValue,
+});
+
+export const setActiveBird = (bird) => ({
+  type: birdsActionTypes.SET_ACTIVE_BIRD,
+  payload: bird,
+});
+
+export const setQuestionBird = (bird) => ({
+  type: birdsActionTypes.SET_QUESTION_BIRD,
+  payload: bird,
+});
+
+export const setAnswered = () => ({
+  type: birdsActionTypes.SET_ANSWERED,
+});
+
+export const increaseLevel = () => ({
+  type: birdsActionTypes.INCREASE_LEVEL,
+});
+
+export const increaseScore = (exptaScore) => ({
+  type: birdsActionTypes.INCREASE_SCORE,
+  payload: exptaScore,
+});
+
+export const decreaseExtraScore = () => ({
+  type: birdsActionTypes.DECREASE_EXPTRA_SCORE,
+});
+
+export const resetExtraScore = () => ({
+  type: birdsActionTypes.RESET_EXTRA_SCORE,
+});
+
+export const resetActiveBird = () => ({
+  type: birdsActionTypes.RESET_ACTIVE_BIRD,
+});

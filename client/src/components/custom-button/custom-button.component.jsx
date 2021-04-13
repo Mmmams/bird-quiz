@@ -2,32 +2,53 @@ import React from "react";
 
 import "./custom-button.styles.scss";
 
-import { selectLevel, selectAnswered } from "../../redux/birds/birds.selector";
 import { useDispatch, useSelector } from "react-redux";
+
+import { currentBirdsArray, getRandomValue } from "../../utils";
+
 import {
-  goNextLevelStart,
-  cleanBirdInfo,
-  chooseCurrentList,
-  changeNameList,
+  increaseScore,
   increaseLevel,
-  changeAudioList,
-  resetAnswer,
-  endGame,
-  getRandom,
-  resetExtraScore,
+  setAnswered,
+  setCurrentBirdArray,
+  resetActiveBird,
+  setRandomValue,
 } from "../../redux/birds/birds.action";
+
+import {
+  selectAnswered,
+  selectExtraScore,
+  selectLevel,
+  selectBirdsArray,
+} from "../../redux/birds/birds.selector";
 
 const CustomButton = () => {
   const dispatch = useDispatch();
 
-  const handleGoNextLevel = () => {};
+  const answered = useSelector(selectAnswered);
+  const level = useSelector(selectLevel);
+  const initialArray = useSelector(selectBirdsArray);
+  const extraScore = useSelector(selectExtraScore);
+
+  const handleButton = () => {
+    if (answered === true) {
+      dispatch(increaseLevel());
+      dispatch(increaseScore(extraScore));
+      dispatch(setAnswered());
+      dispatch(resetActiveBird());
+      const currentArray = currentBirdsArray(level + 1, initialArray);
+      dispatch(setCurrentBirdArray(currentArray));
+      const randomValue = getRandomValue(currentArray.length);
+      dispatch(setRandomValue(randomValue));
+    }
+  };
 
   return (
     <div>
       <button
-        className={true ? "custom-button" : "blockedBtn"}
+        className={answered ? "custom-button" : "blockedBtn"}
         onClick={() => {
-          handleGoNextLevel();
+          handleButton();
         }}
       >
         Следующий уровень

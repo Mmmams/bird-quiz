@@ -6,21 +6,41 @@ import right from "../../assets/true.mp3";
 import wrong from "../../assets/wrong.mp3";
 import { useEffect } from "react";
 
-const BirdsList = () => {
-  const random = 1;
-  const answered = true;
+import { setActiveBird, setAnswered } from "../../redux/birds/birds.action";
 
-  const handleChooseList = (event, index) => {};
+import {
+  selectCurrentBirdsArray,
+  selectAnswered,
+  selectRandom,
+} from "../../redux/birds/birds.selector";
+
+const BirdsList = () => {
+  const dispatch = useDispatch();
+
+  const random = useSelector(selectRandom);
+  const answered = useSelector(selectAnswered);
+  const currentArray = useSelector(selectCurrentBirdsArray);
+
+  const handleChooseList = (event, index) => {
+    dispatch(setActiveBird(currentArray[index]));
+    if (index === random) {
+      if (answered === false) {
+        dispatch(setAnswered());
+      }
+    } else {
+      console.log("wrong");
+    }
+  };
 
   return (
     <div className="bird-list-container">
-      {1 ? (
+      {currentArray ? (
         <div>
           <ul className="bird-list">
-            {[].map((name, index) => (
+            {currentArray.map((bird, index) => (
               <li
                 className="list"
-                key={index}
+                key={bird._id}
                 onClick={(event) => handleChooseList(event, index)}
               >
                 <svg className="options_block" width="14" height="14">
@@ -33,7 +53,7 @@ const BirdsList = () => {
                     fill="white"
                   ></circle>
                 </svg>
-                <span>name</span>
+                <span>{bird.name}</span>
               </li>
             ))}
           </ul>

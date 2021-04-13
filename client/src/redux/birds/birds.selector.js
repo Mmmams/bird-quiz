@@ -9,7 +9,7 @@ export const selectBirdsArray = createSelector(
 
 export const selectCurrentBirdsArray = createSelector(
   [selectBirds],
-  (birds) => birds.CurrentbirdsArray
+  (birds) => birds.currentBirdsArray
 );
 
 export const selectLevel = createSelector(
@@ -34,10 +34,20 @@ export const selectRandom = createSelector(
 
 export const selectAnswered = createSelector(
   [selectBirds],
-  (birds) => birds.Answered
+  (birds) => birds.answered
 );
 
 export const selectEndGame = createSelector(
   [selectBirds],
   (birds) => birds.endGame
+);
+
+export const selectActiveBird = createSelector(
+  [selectBirds],
+  (birds) => birds.activeBird
+);
+
+export const selectQuestionBird = createSelector(
+  [selectBirds],
+  (birds) => birds.questionBird
 );

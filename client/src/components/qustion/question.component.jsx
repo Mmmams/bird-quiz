@@ -1,20 +1,53 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 import "./qustion.styles.scss";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { setQuestionBird } from "../../redux/birds/birds.action";
+
+import {
+  selectRandom,
+  selectQuestionBird,
+  selectAnswered,
+  selectCurrentBirdsArray,
+} from "../../redux/birds/birds.selector";
 
 const Question = () => {
-  const answered = true;
+  const dispatch = useDispatch();
+
+  const currentArray = useSelector(selectCurrentBirdsArray);
+  const random = useSelector(selectRandom);
+  const questionBird = useSelector(selectQuestionBird);
+  const answered = useSelector(selectAnswered);
+
+  useEffect(() => {
+    if (currentArray) {
+      dispatch(setQuestionBird(currentArray[random]));
+    }
+  }, [random]);
+
   return (
     <div className="question">
       <div>
-        <img className="question-image" alt="unknown-bird" src="" />
+        <img
+          className="question-image"
+          alt="unknown-bird"
+          src={
+            answered
+              ? questionBird.image
+              : "data:image/jpeg;base64,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"
+          }
+        />
       </div>
       <div className="question-data">
-        <div className="name">{answered ? "name" : "******"}</div>
-        {true ? (
-          <audio className="question-audio" controls src=""></audio>
+        <div className="name">{answered ? questionBird.name : "******"}</div>
+        {questionBird ? (
+          <audio
+            className="question-audio"
+            controls
+            src={questionBird.audio}
+          ></audio>
         ) : (
           <div className="loading">Загрузка...</div>
         )}
