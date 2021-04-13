@@ -58,3 +58,17 @@ export const resetExtraScore = () => ({
 export const resetActiveBird = () => ({
   type: birdsActionTypes.RESET_ACTIVE_BIRD,
 });
+
+export const resetGame = () => ({
+  type: birdsActionTypes.RESET_GAME,
+});
+
+export const fillColorsArray = (colorsArray) => ({
+  type: birdsActionTypes.FILL_COLORS_ARRAY,
+  payload: colorsArray,
+});
+
+export const changeListColor = (color, index) => ({
+  type: birdsActionTypes.CHANGE_LIST_COLOR,
+  payload: { color, index },
+});

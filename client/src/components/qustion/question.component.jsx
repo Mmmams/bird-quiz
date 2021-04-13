@@ -21,6 +21,11 @@ const Question = () => {
   const questionBird = useSelector(selectQuestionBird);
   const answered = useSelector(selectAnswered);
 
+  const currentAudio = useRef(null);
+  if (answered === true) {
+    currentAudio.current.pause();
+  }
+
   useEffect(() => {
     if (currentArray) {
       dispatch(setQuestionBird(currentArray[random]));
@@ -47,6 +52,7 @@ const Question = () => {
             className="question-audio"
             controls
             src={questionBird.audio}
+            ref={currentAudio}
           ></audio>
         ) : (
           <div className="loading">Загрузка...</div>

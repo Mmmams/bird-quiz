@@ -1,7 +1,6 @@
 import birdsActionTypes from "./birds.types";
 
 const INITIAL_STATE = {
-  endGame: false,
   extraScore: 5,
   random: null,
   answered: false,
@@ -12,6 +11,7 @@ const INITIAL_STATE = {
   activeBird: null,
   questionBird: null,
   error: null,
+  colorsArray: [],
 };
 
 const birdReducer = (state = INITIAL_STATE, action) => {
@@ -65,7 +65,7 @@ const birdReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         extraScore:
-          state.extraScore < 0 ? state.extraScore - 1 : state.extraScore,
+          state.extraScore >= 0 ? state.extraScore - 1 : state.extraScore,
       };
     case birdsActionTypes.RESET_EXTRA_SCORE:
       return {
@@ -76,6 +76,30 @@ const birdReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         activeBird: null,
+      };
+    case birdsActionTypes.FILL_COLORS_ARRAY:
+      return {
+        ...state,
+        colorsArray: action.payload,
+      };
+    case birdsActionTypes.CHANGE_LIST_COLOR:
+      return {
+        ...state,
+        colorsArray: state.colorsArray.map((color, index) =>
+          index === action.payload.index
+            ? (color = action.payload.color)
+            : color
+        ),
+      };
+    case birdsActionTypes.RESET_GAME:
+      return {
+        ...state,
+        level: 1,
+        extraScore: 5,
+        score: 0,
+        answered: false,
+        activeBird: null,
+        questionBird: null,
       };
     default:
       return {

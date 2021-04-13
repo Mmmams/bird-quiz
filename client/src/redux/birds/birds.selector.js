@@ -37,11 +37,6 @@ export const selectAnswered = createSelector(
   (birds) => birds.answered
 );
 
-export const selectEndGame = createSelector(
-  [selectBirds],
-  (birds) => birds.endGame
-);
-
 export const selectActiveBird = createSelector(
   [selectBirds],
   (birds) => birds.activeBird
@@ -50,4 +45,9 @@ export const selectActiveBird = createSelector(
 export const selectQuestionBird = createSelector(
   [selectBirds],
   (birds) => birds.questionBird
+);
+
+export const selectColorsArray = createSelector(
+  [selectBirds],
+  (birds) => birds.colorsArray
 );

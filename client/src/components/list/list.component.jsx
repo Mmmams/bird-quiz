@@ -4,31 +4,50 @@ import { useDispatch, useSelector } from "react-redux";
 
 import right from "../../assets/true.mp3";
 import wrong from "../../assets/wrong.mp3";
-import { useEffect } from "react";
 
-import { setActiveBird, setAnswered } from "../../redux/birds/birds.action";
+import {
+  setActiveBird,
+  setAnswered,
+  decreaseExtraScore,
+  increaseScore,
+  changeListColor,
+} from "../../redux/birds/birds.action";
 
 import {
   selectCurrentBirdsArray,
   selectAnswered,
   selectRandom,
+  selectExtraScore,
+  selectColorsArray,
 } from "../../redux/birds/birds.selector";
 
 const BirdsList = () => {
   const dispatch = useDispatch();
 
+  const rightAnswerAudio = new Audio(right);
+  const wrongAnswerAudio = new Audio(wrong);
+
+  const colorsArray = useSelector(selectColorsArray);
   const random = useSelector(selectRandom);
   const answered = useSelector(selectAnswered);
   const currentArray = useSelector(selectCurrentBirdsArray);
+  const extraScore = useSelector(selectExtraScore);
 
   const handleChooseList = (event, index) => {
     dispatch(setActiveBird(currentArray[index]));
     if (index === random) {
       if (answered === false) {
+        rightAnswerAudio.play();
+        dispatch(changeListColor("green", index));
+        dispatch(increaseScore(extraScore));
         dispatch(setAnswered());
       }
     } else {
-      console.log("wrong");
+      if (answered === false && colorsArray[index] !== "red") {
+        wrongAnswerAudio.play();
+        dispatch(decreaseExtraScore());
+        dispatch(changeListColor("red", index));
+      }
     }
   };
 
@@ -50,7 +69,7 @@ const BirdsList = () => {
                     r="6"
                     stroke="black"
                     strokeWidth="1"
-                    fill="white"
+                    fill={colorsArray[index]}
                   ></circle>
                 </svg>
                 <span>{bird.name}</span>

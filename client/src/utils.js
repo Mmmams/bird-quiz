@@ -16,3 +16,11 @@ export const audioClick = (answer) => {
     wrongAnswer.play();
   }
 };
+
+export const fillColorsArrayFucntion = (birdsArray) => {
+  const colorsArray = [];
+  for (let i = 0; i < birdsArray.length; i++) {
+    colorsArray.push("white");
+  }
+  return colorsArray;
+};

@@ -4,18 +4,51 @@ import "./endgame.styles.scss";
 
 import { useDispatch, useSelector } from "react-redux";
 
+import {
+  getRandomValue,
+  currentBirdsArray,
+  fillColorsArrayFucntion,
+} from "../../utils";
+
+import {
+  resetGame,
+  setRandomValue,
+  setCurrentBirdArray,
+  fillColorsArray,
+} from "../../redux/birds/birds.action";
+
+import {
+  selectScore,
+  selectLevel,
+  selectBirdsArray,
+} from "../../redux/birds/birds.selector";
+
 const EndGame = () => {
   const dispatch = useDispatch();
 
-  const handleEndGame = () => {};
+  const score = useSelector(selectScore);
+  const level = useSelector(selectLevel);
+  const initialArray = useSelector(selectBirdsArray);
+
+  const handleEndGame = () => {
+    dispatch(resetGame());
+    const currentArray = currentBirdsArray(1, initialArray);
+    dispatch(setCurrentBirdArray(currentArray));
+
+    const colorsArray = fillColorsArrayFucntion(currentArray);
+    dispatch(fillColorsArray(colorsArray));
+
+    const randomValue = getRandomValue(currentArray.length);
+    dispatch(setRandomValue(randomValue));
+  };
 
   return (
     <div className="endgame-container">
       <div className="endgame-title">Поздравляем</div>
       <div className="endgame-subtitle">
-        Игра окончена. Общий результат из 24 возможных баллов.
+        Игра окончена. Общий результат {score} из 30 возможных баллов.
       </div>
-      {1 === 24 ? (
+      {score === 30 ? (
         <div className="endgame-subtitle">Поздравляем, Вы прошли игру.</div>
       ) : (
         <button className="endgame-btn" onClick={() => handleEndGame()}>

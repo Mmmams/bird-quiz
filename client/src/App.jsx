@@ -8,19 +8,29 @@ import Main from "./components/main/main.component";
 import Question from "./components/qustion/question.component";
 import CustomButton from "./components/custom-button/custom-button.component";
 import EndGame from "./components/endgame/endgame.component";
+import Login from "./components/login/login";
 
-import { currentBirdsArray, getRandomValue } from "./utils.js";
+import {
+  currentBirdsArray,
+  getRandomValue,
+  fillColorsArrayFucntion,
+} from "./utils.js";
+
+import { selectCurrentUser } from "./redux/user/user.selector";
 
 import {
   fetchInfoStart,
   setCurrentBirdArray,
   setRandomValue,
+  fillColorsArray,
 } from "./redux/birds/birds.action";
 
 import { selectLevel, selectBirdsArray } from "./redux/birds/birds.selector";
 
 function App() {
   const dispatch = useDispatch();
+
+  const currentUser = useSelector(selectCurrentUser);
 
   const level = useSelector(selectLevel);
   const initialBirdsArray = useSelector(selectBirdsArray);
@@ -33,6 +43,8 @@ function App() {
     if (initialBirdsArray) {
       const currentArray = currentBirdsArray(level, initialBirdsArray);
       const randomValue = getRandomValue(currentArray.length);
+      const colorsArray = fillColorsArrayFucntion(currentArray);
+      dispatch(fillColorsArray(colorsArray));
       dispatch(setCurrentBirdArray(currentArray));
       dispatch(setRandomValue(randomValue));
     }
@@ -40,15 +52,23 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      {currentUser ? (
+        <div>
+          <Header />
 
-      {false ? (
-        <EndGame />
+          {level > 6 ? (
+            <EndGame />
+          ) : (
+            <div>
+              <Question />
+              <Main />
+              <CustomButton />
+            </div>
+          )}
+        </div>
       ) : (
         <div>
-          <Question />
-          <Main />
-          <CustomButton />
+          <Login />
         </div>
       )}
     </div>

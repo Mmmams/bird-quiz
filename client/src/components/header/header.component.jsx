@@ -4,9 +4,11 @@ import "./header.styles.scss";
 
 import { useSelector } from "react-redux";
 
+import { selectLevel, selectScore } from "../../redux/birds/birds.selector";
+
 const Header = () => {
-  const level = 0;
-  const score = 1;
+  const level = useSelector(selectLevel);
+  const score = useSelector(selectScore);
   return (
     <div className="header">
       <div className="header-info">
@@ -16,22 +18,22 @@ const Header = () => {
         <div className="score">Баллы: {score}</div>
       </div>
       <ul className="header-list">
-        <li className={`${level === 0 ? "currentLevel" : ""}  list`}>
+        <li className={`${level === 1 ? "currentLevel" : ""}  list`}>
           Разминка
         </li>
-        <li className={`${level === 1 ? "currentLevel" : ""}  list`}>
+        <li className={`${level === 2 ? "currentLevel" : ""}  list`}>
           Воробьиные
         </li>
-        <li className={`${level === 2 ? "currentLevel" : ""}  list`}>
+        <li className={`${level === 3 ? "currentLevel" : ""}  list`}>
           Лесные птицы
         </li>
-        <li className={`${level === 3 ? "currentLevel" : ""}  list`}>
+        <li className={`${level === 4 ? "currentLevel" : ""}  list`}>
           Певчие птицы
         </li>
-        <li className={`${level === 4 ? "currentLevel" : ""}  list`}>
+        <li className={`${level === 5 ? "currentLevel" : ""}  list`}>
           Хищные птицы
         </li>
-        <li className={`${level === 5 ? "currentLevel" : ""}  list`}>
+        <li className={`${level === 6 ? "currentLevel" : ""}  list`}>
           Морские птицы
         </li>
       </ul>
