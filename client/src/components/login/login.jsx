@@ -1,4 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { signUpStart } from "../../redux/user/user.actions";
+
+import { selectError } from "../../redux/user/user.selector";
+
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -9,6 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, createMuiTheme } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { ThemeProvider } from "@material-ui/styles";
+import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,7 +49,23 @@ const theme = createMuiTheme({
 });
 
 export default function Login() {
+  const dispatch = useDispatch();
+
   const classes = useStyles();
+
+  const error = useSelector(selectError);
+
+  const [form, setForm] = useState({ email: "", password: "" });
+
+  const handleChanges = (event) => {
+    event.preventDefault();
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
+
+  const handleSignUp = async (event) => {
+    event.preventDefault();
+    dispatch(signUpStart(form.email, form.password));
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -66,6 +89,7 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={handleChanges}
             />
             <TextField
               variant="outlined"
@@ -77,7 +101,9 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChanges}
             />
+            {error ? <Alert severity="error">{error}</Alert> : null}
 
             <Grid container justify={"space-between"}>
               <Grid item>
@@ -98,6 +124,7 @@ export default function Login() {
                   variant="contained"
                   color="primary"
                   className={classes.submit}
+                  onClick={handleSignUp}
                 >
                   Зарегестрироваться
                 </Button>
