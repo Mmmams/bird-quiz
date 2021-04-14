@@ -16,6 +16,8 @@ import {
   fillColorsArrayFucntion,
 } from "./utils.js";
 
+import { loginSuccess } from "./redux/user/user.actions";
+
 import { selectCurrentUser } from "./redux/user/user.selector";
 
 import {
@@ -37,6 +39,10 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchInfoStart());
+  }, []);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    dispatch(loginSuccess(user));
   }, []);
 
   useEffect(() => {

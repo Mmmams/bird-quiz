@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { signUpStart, loginStart } from "../../redux/user/user.actions";
 
-import { selectMessage } from "../../redux/user/user.selector";
+import {
+  selectMessage,
+  selectCurrentUser,
+} from "../../redux/user/user.selector";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -26,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: "#388e3c",
+    backgroundColor: "#64b5f6",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -40,10 +43,10 @@ const useStyles = makeStyles((theme) => ({
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#388e3c",
+      main: "#64b5f6",
     },
     secondary: {
-      main: "#81c784",
+      main: "#008cff",
     },
   },
 });
@@ -54,7 +57,7 @@ export default function Login() {
   const classes = useStyles();
 
   const message = useSelector(selectMessage);
-
+  const user = useSelector(selectCurrentUser);
   const [form, setForm] = useState({ email: "", password: "" });
 
   const handleChanges = (event) => {
@@ -122,7 +125,7 @@ export default function Login() {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   className={classes.submit}
                   onClick={handleLogin}
                 >
@@ -134,7 +137,7 @@ export default function Login() {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   className={classes.submit}
                   onClick={handleSignUp}
                 >

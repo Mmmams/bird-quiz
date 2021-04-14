@@ -12,15 +12,19 @@ ul {
   border-radius: 10px;
   background-color: #64b5f6;
   margin: 0 auto;
-
+  &-userinfo {
+    display: flex;
+    flex-direction: row;
+  }
   &-info {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-
+    align-items: center;
     .score {
-      color: black;
-      font-size: 32px;
+      color: white;
+      align-items: center;
+      font-size: 25px;
       margin: 15px;
     }
   }

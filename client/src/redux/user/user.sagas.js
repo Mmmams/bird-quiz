@@ -36,6 +36,7 @@ export function* loginStart({ payload }) {
     } else {
       yield put(loginSuccess(currentUser));
     }
+    localStorage.setItem("user", JSON.stringify(currentUser));
   } catch (err) {
     yield put(loginFail(err));
   }

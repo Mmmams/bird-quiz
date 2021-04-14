@@ -1,27 +1,60 @@
 import React from "react";
 
+import { useSelector, useDispatch } from "react-redux";
+
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+
 import "./header.styles.scss";
 
-import { useSelector } from "react-redux";
+import { loginSuccess } from "../../redux/user/user.actions";
 
 import { selectLevel, selectScore } from "../../redux/birds/birds.selector";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  btn: {
+    margin: "10px",
+    color: "white",
+  },
+}));
+
 const Header = () => {
+  const classes = useStyles();
+
+  const dispatch = useDispatch();
+
   const level = useSelector(selectLevel);
   const score = useSelector(selectScore);
   const user = useSelector(selectCurrentUser);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    dispatch(loginSuccess(null));
+  };
+
   return (
     <div className="header">
       <div className="header-info">
         <div className="header-logo">
           Song<span className="logo-part">Bird</span>
         </div>
-        <div className="score">
-          <span style={{ color: "#2399fa", fontSize: "19px" }}>
-            {user.email}
-          </span>{" "}
-          Баллы: {score}
+        <div className="header-userinfo">
+          <div className="score">
+            {user.email}: {score}
+          </div>
+          <Button
+            variant="outlined"
+            className={classes.btn}
+            onClick={handleLogout}
+          >
+            Выйти
+          </Button>
         </div>
       </div>
       <ul className="header-list">
