@@ -16,9 +16,9 @@ import {
   fillColorsArrayFucntion,
 } from "./utils.js";
 
-import { loginSuccess } from "./redux/user/user.actions";
+import { loginSuccess, updateLevelSuccess } from "./redux/user/user.actions";
 
-import { selectCurrentUser } from "./redux/user/user.selector";
+import { selectCurrentUser, selectLevel } from "./redux/user/user.selector";
 
 import {
   fetchInfoStart,
@@ -27,22 +27,24 @@ import {
   fillColorsArray,
 } from "./redux/birds/birds.action";
 
-import { selectLevel, selectBirdsArray } from "./redux/birds/birds.selector";
+import { selectBirdsArray } from "./redux/birds/birds.selector";
 
 function App() {
   const dispatch = useDispatch();
 
+  const maxLevel = 6;
   const currentUser = useSelector(selectCurrentUser);
-
   const level = useSelector(selectLevel);
   const initialBirdsArray = useSelector(selectBirdsArray);
 
   useEffect(() => {
     dispatch(fetchInfoStart());
   }, []);
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     dispatch(loginSuccess(user));
+    // dispatch(updateLevelSuccess(currentUser.level));
   }, []);
 
   useEffect(() => {
@@ -62,7 +64,7 @@ function App() {
         <div>
           <Header />
 
-          {level > 6 ? (
+          {level > maxLevel ? (
             <EndGame />
           ) : (
             <div>

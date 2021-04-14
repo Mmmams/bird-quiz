@@ -10,8 +10,11 @@ import {
   fillColorsArrayFucntion,
 } from "../../utils";
 
+import { selectCurrentUser, selectLevel } from "../../redux/user/user.selector";
+
+import { updateLevelStart } from "../../redux/user/user.actions";
+
 import {
-  increaseLevel,
   setAnswered,
   setCurrentBirdArray,
   resetActiveBird,
@@ -22,29 +25,31 @@ import {
 
 import {
   selectAnswered,
-  selectLevel,
   selectBirdsArray,
 } from "../../redux/birds/birds.selector";
 
 const CustomButton = () => {
   const dispatch = useDispatch();
 
+  const user = useSelector(selectCurrentUser);
   const answered = useSelector(selectAnswered);
   const level = useSelector(selectLevel);
   const initialArray = useSelector(selectBirdsArray);
 
   const handleButton = () => {
     if (answered === true) {
-      dispatch(increaseLevel());
       dispatch(setAnswered());
       dispatch(resetActiveBird());
       dispatch(resetExtraScore());
+      dispatch(updateLevelStart({ email: user.email }));
       const currentArray = currentBirdsArray(level + 1, initialArray);
       dispatch(setCurrentBirdArray(currentArray));
       const randomValue = getRandomValue(currentArray.length);
       dispatch(setRandomValue(randomValue));
       const colorsArray = fillColorsArrayFucntion(currentArray);
       dispatch(fillColorsArray(colorsArray));
+      console.log(user);
+      localStorage.setItem("user", JSON.stringify(user));
     }
   };
 

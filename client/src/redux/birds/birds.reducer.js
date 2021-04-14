@@ -5,7 +5,6 @@ const INITIAL_STATE = {
   random: null,
   answered: false,
   score: 0,
-  level: 1,
   birdsArray: null,
   currentBirdsArray: null,
   activeBird: null,
@@ -51,11 +50,6 @@ const birdReducer = (state = INITIAL_STATE, action) => {
         ...state,
         answered: !state.answered,
       };
-    case birdsActionTypes.INCREASE_LEVEL:
-      return {
-        ...state,
-        level: state.level + 1,
-      };
     case birdsActionTypes.INCREASE_SCORE:
       return {
         ...state,
@@ -94,7 +88,6 @@ const birdReducer = (state = INITIAL_STATE, action) => {
     case birdsActionTypes.RESET_GAME:
       return {
         ...state,
-        level: 1,
         extraScore: 5,
         score: 0,
         answered: false,

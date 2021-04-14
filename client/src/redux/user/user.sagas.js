@@ -9,10 +9,36 @@ import {
   signUpSuccess,
   loginFail,
   loginSuccess,
+  updateLevelFail,
+  updateLevelSuccess,
 } from "./user.actions";
 
 export function* userSaga() {
-  yield all([call(onSignUpStart), call(onLoginStart)]);
+  yield all([
+    call(onSignUpStart),
+    call(onLoginStart),
+    call(onUpdateLevelStart),
+  ]);
+}
+
+export function* onUpdateLevelStart() {
+  yield takeLatest(userActionTypes.UPDATE_LEVEL_START, updateLevelStart);
+}
+
+export function* updateLevelStart({ payload }) {
+  const { email } = payload;
+  try {
+    const level = yield fetch("http://localhost:5000/updateLevel", {
+      method: "PATCH",
+      credentials: "include",
+      body: JSON.stringify({ email }),
+      headers: { "Content-Type": "application/json" },
+    });
+    const currentLevel = yield level.json();
+    yield put(updateLevelSuccess(currentLevel));
+  } catch (error) {
+    yield put(updateLevelFail(error));
+  }
 }
 
 export function* onLoginStart() {

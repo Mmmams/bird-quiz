@@ -9,8 +9,8 @@ import "./header.styles.scss";
 
 import { loginSuccess } from "../../redux/user/user.actions";
 
-import { selectLevel, selectScore } from "../../redux/birds/birds.selector";
-import { selectCurrentUser } from "../../redux/user/user.selector";
+import { selectScore } from "../../redux/birds/birds.selector";
+import { selectCurrentUser, selectLevel } from "../../redux/user/user.selector";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,9 +29,9 @@ const Header = () => {
 
   const dispatch = useDispatch();
 
+  const user = useSelector(selectCurrentUser);
   const level = useSelector(selectLevel);
   const score = useSelector(selectScore);
-  const user = useSelector(selectCurrentUser);
 
   const handleLogout = () => {
     localStorage.removeItem("user");

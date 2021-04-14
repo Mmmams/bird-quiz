@@ -10,6 +10,8 @@ import {
   fillColorsArrayFucntion,
 } from "../../utils";
 
+import { selectLevel } from "../../redux/user/user.selector";
+
 import {
   resetGame,
   setRandomValue,
@@ -19,7 +21,6 @@ import {
 
 import {
   selectScore,
-  selectLevel,
   selectBirdsArray,
 } from "../../redux/birds/birds.selector";
 
@@ -29,6 +30,7 @@ const EndGame = () => {
   const score = useSelector(selectScore);
   const level = useSelector(selectLevel);
   const initialArray = useSelector(selectBirdsArray);
+  const maxScore = 30;
 
   const handleEndGame = () => {
     dispatch(resetGame());
@@ -48,7 +50,7 @@ const EndGame = () => {
       <div className="endgame-subtitle">
         Игра окончена. Общий результат {score} из 30 возможных баллов.
       </div>
-      {score === 30 ? (
+      {score === maxScore ? (
         <div className="endgame-subtitle">Поздравляем, Вы прошли игру.</div>
       ) : (
         <button className="endgame-btn" onClick={() => handleEndGame()}>

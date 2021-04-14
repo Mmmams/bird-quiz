@@ -29,3 +29,18 @@ export const loginFail = (error) => ({
   type: userActionTypes.LOGIN_FAIL,
   payload: error,
 });
+
+export const updateLevelStart = (email) => ({
+  type: userActionTypes.UPDATE_LEVEL_START,
+  payload: email,
+});
+
+export const updateLevelSuccess = (level) => ({
+  type: userActionTypes.UPDATE_LEVEL_SUCCESS,
+  payload: level,
+});
+
+export const updateLevelFail = (error) => ({
+  type: userActionTypes.UPDATE_LEVEL_FAIL,
+  payload: error,
+});

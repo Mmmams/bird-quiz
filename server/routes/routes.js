@@ -97,5 +97,22 @@ router.post(
     }
   }
 );
+router.patch("/updateLevel", async (req, res) => {
+  console.log("REQBODY", req.body);
+  const { email } = req.body;
+  User.findOne({ email }, (err, user) => {
+    if (err) {
+      console.error("ERROR", err);
+    }
+    console.log(user);
+    user.currentLevel = user.currentLevel + 1;
+    user.save(user);
+    res.json(user.currentLevel);
+  });
+  // const user = await User.findOne({ email });
+  // console.log(user);
+  // user.update({ currentLevel: 5 });
+  // res.json(user.currentLevel);
+});
 
 module.exports = router;

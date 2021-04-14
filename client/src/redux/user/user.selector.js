@@ -11,3 +11,5 @@ export const selectMessage = createSelector(
   [selectUser],
   (user) => user.message
 );
+
+export const selectLevel = createSelector([selectUser], (user) => user.level);

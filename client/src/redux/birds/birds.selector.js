@@ -12,11 +12,6 @@ export const selectCurrentBirdsArray = createSelector(
   (birds) => birds.currentBirdsArray
 );
 
-export const selectLevel = createSelector(
-  [selectBirds],
-  (birds) => birds.level
-);
-
 export const selectScore = createSelector(
   [selectBirds],
   (birds) => birds.score

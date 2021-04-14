@@ -2,8 +2,8 @@ import userActionTypes from "./user.types";
 
 const INITIAL_STATE = {
   currentUser: null,
+  level: 1,
   message: null,
-  level: null,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -28,6 +28,17 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         message: action.payload,
       };
+    case userActionTypes.UPDATE_LEVEL_SUCCESS:
+      return {
+        ...state,
+        level: action.payload,
+      };
+    case userActionTypes.UPDATE_LEVEL_FAIL:
+      return {
+        ...state,
+        message: action.payload,
+      };
+
     default: {
       return {
         ...state,

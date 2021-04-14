@@ -38,10 +38,6 @@ export const setAnswered = () => ({
   type: birdsActionTypes.SET_ANSWERED,
 });
 
-export const increaseLevel = () => ({
-  type: birdsActionTypes.INCREASE_LEVEL,
-});
-
 export const increaseScore = (exptaScore) => ({
   type: birdsActionTypes.INCREASE_SCORE,
   payload: exptaScore,
