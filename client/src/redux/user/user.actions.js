@@ -14,3 +14,18 @@ export const signUpStart = (email, password) => ({
   type: userActionTypes.SIGN_UP_START,
   payload: { email, password },
 });
+
+export const loginStart = (email, password) => ({
+  type: userActionTypes.LOGIN_START,
+  payload: { email, password },
+});
+
+export const loginSuccess = (user) => ({
+  type: userActionTypes.LOGIN_SUCCESS,
+  payload: user,
+});
+
+export const loginFail = (error) => ({
+  type: userActionTypes.LOGIN_FAIL,
+  payload: error,
+});

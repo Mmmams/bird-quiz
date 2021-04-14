@@ -1,7 +1,7 @@
 .bird-list-container {
   flex-grow: 1;
   border-radius: 10px;
-  background-color: rgb(125, 201, 150);
+  background-color: #64b5f6;
   margin-right: 20px;
   margin-bottom: 20px;
   @media screen and (max-width: 420px) {
@@ -24,9 +24,10 @@
     justify-content: flex-start;
     display: flex;
     cursor: pointer;
+    color: white;
     margin: 3px;
     &:hover {
-      background-color: rgb(139, 231, 170);
+      background-color: #2b9af5;
     }
   }
 }

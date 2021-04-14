@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { signUpStart } from "../../redux/user/user.actions";
+import { signUpStart, loginStart } from "../../redux/user/user.actions";
 
-import { selectError } from "../../redux/user/user.selector";
+import { selectMessage } from "../../redux/user/user.selector";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -53,7 +53,7 @@ export default function Login() {
 
   const classes = useStyles();
 
-  const error = useSelector(selectError);
+  const message = useSelector(selectMessage);
 
   const [form, setForm] = useState({ email: "", password: "" });
 
@@ -65,6 +65,11 @@ export default function Login() {
   const handleSignUp = async (event) => {
     event.preventDefault();
     dispatch(signUpStart(form.email, form.password));
+  };
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    dispatch(loginStart(form.email, form.password));
   };
 
   return (
@@ -103,7 +108,13 @@ export default function Login() {
               autoComplete="current-password"
               onChange={handleChanges}
             />
-            {error ? <Alert severity="error">{error}</Alert> : null}
+            {message ? (
+              message === "Пользователь успешно создан!" ? (
+                <Alert severity="success">{message}</Alert>
+              ) : (
+                <Alert severity="error">{message}</Alert>
+              )
+            ) : null}
 
             <Grid container justify={"space-between"}>
               <Grid item>
@@ -113,6 +124,7 @@ export default function Login() {
                   variant="contained"
                   color="primary"
                   className={classes.submit}
+                  onClick={handleLogin}
                 >
                   Войти
                 </Button>
