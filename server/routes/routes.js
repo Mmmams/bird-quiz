@@ -27,7 +27,8 @@ router.post(
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res.status(400).json({
+        console.log("errors", errors);
+        res.status(400).json({
           errors: errors.array(),
           message: "Некорректные данные при регистрации",
         });
@@ -35,15 +36,21 @@ router.post(
       const { email, password } = req.body;
       const candidade = await User.findOne({ email });
       if (candidade) {
-        return res
+        console.log("candidade", candidade);
+        res
           .status(400)
           .json({ message: "Пользователь с таким email уже существует!" });
       }
-      const hashedPassword = await bcrypt.hash(password, 12);
-      const user = new User({ email, password: hashedPassword, level: 1 });
-      await user.save();
 
-      res.status(201).json({ message: "Пользователь создан" });
+      const hashedPassword = await bcrypt.hash(password, 12);
+      const user = new User({
+        email,
+        password: hashedPassword,
+        currentLevel: 1,
+      });
+      await user.save();
+      console.log(user);
+      await res.status(201).send({ success: "Пользователь успешно создан!" });
     } catch (err) {
       res
         .status(500)
@@ -82,7 +89,7 @@ router.post(
       const token = jwt.sign({ userId: user.id }, process.env.jwtSecret, {
         expiresIn: "1h",
       });
-      res.json({ token, userId: user.id });
+      res.json({ token, userId: user.id, email, level: user.currentLevel });
     } catch (err) {
       res
         .status(500)
