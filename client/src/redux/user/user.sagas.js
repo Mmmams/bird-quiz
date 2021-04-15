@@ -33,6 +33,7 @@ export function* onResetLevelStart() {
 
 export function* resetLevelStart({ payload }) {
   const email = payload;
+  console.log(payload);
   console.log(email);
   try {
     const level = yield fetch("http://localhost:5000/resetLevel", {
@@ -54,7 +55,6 @@ export function* onGetLevelStart() {
 
 export function* getLevelStart({ payload }) {
   const email = payload;
-  console.log(email);
   try {
     const level = yield fetch("http://localhost:5000/getLevel", {
       method: "POST",

@@ -53,6 +53,16 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         message: action.payload,
       };
+    case userActionTypes.RESET_LEVEL_SUCCESS:
+      return {
+        ...state,
+        level: action.payload,
+      };
+    case userActionTypes.RESET_LEVEL_FAIL:
+      return {
+        ...state,
+        messgae: action.payload,
+      };
     default: {
       return {
         ...state,
