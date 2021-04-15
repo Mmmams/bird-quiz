@@ -38,7 +38,21 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         message: action.payload,
       };
-
+    case userActionTypes.GET_LEVEL_SUCCESS:
+      return {
+        ...state,
+        level: action.payload,
+      };
+    case userActionTypes.GET_LEVEL_FAIL:
+      return {
+        ...state,
+        message: action.payload,
+      };
+    case userActionTypes.SET_MESSAGE:
+      return {
+        ...state,
+        message: action.payload,
+      };
     default: {
       return {
         ...state,

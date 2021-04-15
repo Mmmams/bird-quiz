@@ -10,7 +10,9 @@ import {
   fillColorsArrayFucntion,
 } from "../../utils";
 
-import { selectLevel } from "../../redux/user/user.selector";
+import { selectCurrentUser } from "../../redux/user/user.selector";
+
+import { resetLevelStart } from "../../redux/user/user.actions.js";
 
 import {
   resetGame,
@@ -28,7 +30,7 @@ const EndGame = () => {
   const dispatch = useDispatch();
 
   const score = useSelector(selectScore);
-  const level = useSelector(selectLevel);
+  const user = useSelector(selectCurrentUser);
   const initialArray = useSelector(selectBirdsArray);
   const maxScore = 30;
 
@@ -42,6 +44,8 @@ const EndGame = () => {
 
     const randomValue = getRandomValue(currentArray.length);
     dispatch(setRandomValue(randomValue));
+
+    dispatch(resetLevelStart(user.email));
   };
 
   return (

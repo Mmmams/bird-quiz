@@ -11,6 +11,10 @@ import {
   loginSuccess,
   updateLevelFail,
   updateLevelSuccess,
+  getLevelFail,
+  getLevelSuccess,
+  resetLevelSuccess,
+  resetLevelFail,
 } from "./user.actions";
 
 export function* userSaga() {
@@ -18,7 +22,51 @@ export function* userSaga() {
     call(onSignUpStart),
     call(onLoginStart),
     call(onUpdateLevelStart),
+    call(onGetLevelStart),
+    call(onResetLevelStart),
   ]);
+}
+
+export function* onResetLevelStart() {
+  yield takeLatest(userActionTypes.RESET_LEVEL_START, resetLevelStart);
+}
+
+export function* resetLevelStart({ payload }) {
+  const email = payload;
+  console.log(email);
+  try {
+    const level = yield fetch("http://localhost:5000/resetLevel", {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify({ email }),
+      headers: { "Content-Type": "application/json" },
+    });
+    const currentLevel = yield level.json();
+    yield put(resetLevelSuccess(currentLevel));
+  } catch (error) {
+    yield put(resetLevelFail(error));
+  }
+}
+
+export function* onGetLevelStart() {
+  yield takeLatest(userActionTypes.GET_LEVEL_START, getLevelStart);
+}
+
+export function* getLevelStart({ payload }) {
+  const email = payload;
+  console.log(email);
+  try {
+    const level = yield fetch("http://localhost:5000/getLevel", {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify({ email }),
+      headers: { "Content-Type": "application/json" },
+    });
+    const currentLevel = yield level.json();
+    yield put(getLevelSuccess(currentLevel));
+  } catch (error) {
+    yield put(getLevelFail(error));
+  }
 }
 
 export function* onUpdateLevelStart() {
@@ -56,7 +104,7 @@ export function* loginStart({ payload }) {
       headers: { "Content-Type": "application/json" },
     });
     const currentUser = yield user.json();
-    console.log(currentUser);
+
     if (currentUser.message) {
       yield put(loginFail(currentUser.message));
     } else {

@@ -12,7 +12,7 @@ import {
 
 import { selectCurrentUser, selectLevel } from "../../redux/user/user.selector";
 
-import { updateLevelStart } from "../../redux/user/user.actions";
+import { updateLevelStart, setMessage } from "../../redux/user/user.actions";
 
 import {
   setAnswered,
@@ -48,7 +48,7 @@ const CustomButton = () => {
       dispatch(setRandomValue(randomValue));
       const colorsArray = fillColorsArrayFucntion(currentArray);
       dispatch(fillColorsArray(colorsArray));
-      console.log(user);
+      dispatch(setMessage(null));
       localStorage.setItem("user", JSON.stringify(user));
     }
   };

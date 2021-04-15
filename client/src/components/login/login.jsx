@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { signUpStart, loginStart } from "../../redux/user/user.actions";
+import {
+  signUpStart,
+  loginStart,
+  getLevelStart,
+  setMessage,
+} from "../../redux/user/user.actions";
 
 import {
   selectMessage,
@@ -68,11 +73,31 @@ export default function Login() {
   const handleSignUp = async (event) => {
     event.preventDefault();
     dispatch(signUpStart(form.email, form.password));
+    dispatch(setMessage(null));
+  };
+
+  const validateEmail = (email) => {
+    if (
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+        email
+      )
+    ) {
+      return true;
+    }
+
+    return false;
   };
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    dispatch(loginStart(form.email, form.password));
+    const validate = validateEmail(form.email);
+    if (validate) {
+      dispatch(loginStart(form.email, form.password));
+      dispatch(getLevelStart(form.email));
+      dispatch(setMessage(null));
+    } else {
+      dispatch(setMessage("Неккоректный email!"));
+    }
   };
 
   return (

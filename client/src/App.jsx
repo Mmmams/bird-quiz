@@ -16,7 +16,7 @@ import {
   fillColorsArrayFucntion,
 } from "./utils.js";
 
-import { loginSuccess, updateLevelSuccess } from "./redux/user/user.actions";
+import { loginSuccess, getLevelStart } from "./redux/user/user.actions";
 
 import { selectCurrentUser, selectLevel } from "./redux/user/user.selector";
 
@@ -44,8 +44,12 @@ function App() {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     dispatch(loginSuccess(user));
-    // dispatch(updateLevelSuccess(currentUser.level));
   }, []);
+  useEffect(() => {
+    if (currentUser) {
+      dispatch(getLevelStart(currentUser.email));
+    }
+  }, [currentUser]);
 
   useEffect(() => {
     if (initialBirdsArray) {

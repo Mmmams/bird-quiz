@@ -44,3 +44,38 @@ export const updateLevelFail = (error) => ({
   type: userActionTypes.UPDATE_LEVEL_FAIL,
   payload: error,
 });
+
+export const getLevelStart = (email) => ({
+  type: userActionTypes.GET_LEVEL_START,
+  payload: email,
+});
+
+export const getLevelSuccess = (level) => ({
+  type: userActionTypes.GET_LEVEL_SUCCESS,
+  payload: level,
+});
+
+export const getLevelFail = (error) => ({
+  type: userActionTypes.GET_LEVEL_FAIL,
+  payload: error,
+});
+
+export const resetLevelStart = (email) => ({
+  type: userActionTypes.RESET_LEVEL_START,
+  payload: email,
+});
+
+export const resetLevelSuccess = (level) => ({
+  type: userActionTypes.RESET_LEVEL_SUCCESS,
+  payload: level,
+});
+
+export const resetLevelFail = (error) => ({
+  type: userActionTypes.RESET_LEVEL_FAIL,
+  payload: error,
+});
+
+export const setMessage = (message) => ({
+  type: userActionTypes.SET_MESSAGE,
+  payload: message,
+});
