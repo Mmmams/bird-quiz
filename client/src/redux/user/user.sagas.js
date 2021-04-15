@@ -33,15 +33,16 @@ export function* onResetLevelStart() {
 
 export function* resetLevelStart({ payload }) {
   const email = payload;
-  console.log(payload);
-  console.log(email);
   try {
-    const level = yield fetch("http://localhost:5000/resetLevel", {
-      method: "POST",
-      credentials: "include",
-      body: JSON.stringify({ email }),
-      headers: { "Content-Type": "application/json" },
-    });
+    const level = yield fetch(
+      "https://bird-quiz-server.herokuapp.com/resetLevel",
+      {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({ email }),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     const currentLevel = yield level.json();
     yield put(resetLevelSuccess(currentLevel));
   } catch (error) {
@@ -56,12 +57,15 @@ export function* onGetLevelStart() {
 export function* getLevelStart({ payload }) {
   const email = payload;
   try {
-    const level = yield fetch("http://localhost:5000/getLevel", {
-      method: "POST",
-      credentials: "include",
-      body: JSON.stringify({ email }),
-      headers: { "Content-Type": "application/json" },
-    });
+    const level = yield fetch(
+      "https://bird-quiz-server.herokuapp.com/getLevel",
+      {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({ email }),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     const currentLevel = yield level.json();
     yield put(getLevelSuccess(currentLevel));
   } catch (error) {
@@ -76,12 +80,15 @@ export function* onUpdateLevelStart() {
 export function* updateLevelStart({ payload }) {
   const { email } = payload;
   try {
-    const level = yield fetch("http://localhost:5000/updateLevel", {
-      method: "PATCH",
-      credentials: "include",
-      body: JSON.stringify({ email }),
-      headers: { "Content-Type": "application/json" },
-    });
+    const level = yield fetch(
+      "https://bird-quiz-server.herokuapp.com/updateLevel",
+      {
+        method: "PATCH",
+        credentials: "include",
+        body: JSON.stringify({ email }),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     const currentLevel = yield level.json();
     yield put(updateLevelSuccess(currentLevel));
   } catch (error) {
@@ -97,7 +104,7 @@ export function* loginStart({ payload }) {
   const { email, password } = payload;
 
   try {
-    const user = yield fetch("http://localhost:5000/login", {
+    const user = yield fetch("https://bird-quiz-server.herokuapp.com/login", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({ email, password }),
@@ -124,7 +131,7 @@ export function* signUpStart({ payload }) {
   const { email, password } = payload;
 
   try {
-    const res = yield fetch("http://localhost:5000/signup", {
+    const res = yield fetch("https://bird-quiz-server.herokuapp.com/signup", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({ email, password }),
