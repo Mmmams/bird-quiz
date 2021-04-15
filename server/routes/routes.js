@@ -89,7 +89,7 @@ router.post(
       const token = jwt.sign({ userId: user.id }, process.env.jwtSecret, {
         expiresIn: "1h",
       });
-      res.json({ token, userId: user.id, email, level: user.currentLevel });
+      res.json({ token, userId: user.id, email });
     } catch (err) {
       res
         .status(500)
@@ -98,21 +98,51 @@ router.post(
   }
 );
 router.patch("/updateLevel", async (req, res) => {
-  console.log("REQBODY", req.body);
-  const { email } = req.body;
-  User.findOne({ email }, (err, user) => {
-    if (err) {
-      console.error("ERROR", err);
-    }
-    console.log(user);
-    user.currentLevel = user.currentLevel + 1;
-    user.save(user);
+  try {
+    const { email } = req.body;
+    User.findOne({ email }, (err, user) => {
+      if (err) {
+        console.error("ERROR", err);
+      }
+      user.currentLevel = user.currentLevel + 1;
+      user.save(user);
+      res.json(user.currentLevel);
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Что то пошло не так, попробуйте снова", error: err });
+  }
+});
+
+router.post("/getLevel", async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
     res.json(user.currentLevel);
-  });
-  // const user = await User.findOne({ email });
-  // console.log(user);
-  // user.update({ currentLevel: 5 });
-  // res.json(user.currentLevel);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Что то пошло не так, попробуйте снова", error: error });
+  }
+});
+
+router.post("/resetLevel", async (req, res) => {
+  try {
+    const { email } = req.body;
+    User.findOne({ email }, (err, user) => {
+      if (err) {
+        console.error("ERROR", err);
+      }
+      user.currentLevel = 1;
+      user.save(user);
+      res.json(user.currentLevel);
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Что то пошло не так, попробуйте снова", error: err });
+  }
 });
 
 module.exports = router;
