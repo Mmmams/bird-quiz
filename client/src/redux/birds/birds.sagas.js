@@ -16,7 +16,9 @@ export function* onFetchInfoStart() {
 
 export function* fetchingInfo() {
   try {
-    const response = yield axios.get("http://localhost:5000/getdata");
+    const response = yield axios.get(
+      "https://bird-quiz-server.herokuapp.com/getdata"
+    );
     yield put(fetchInfoSuccess(response.data));
   } catch (error) {
     yield put(fetchInfoFail(error));
