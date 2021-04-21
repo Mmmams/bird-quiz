@@ -5,11 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import right from "../../assets/true.mp3";
 import wrong from "../../assets/wrong.mp3";
 
+import { updateScoreStart } from "../../redux/user/user.actions.js";
+import { selectCurrentUser } from "../../redux/user/user.selector";
+
 import {
   setActiveBird,
   setAnswered,
   decreaseExtraScore,
-  increaseScore,
   changeListColor,
 } from "../../redux/birds/birds.action";
 
@@ -27,6 +29,8 @@ const BirdsList = () => {
   const rightAnswerAudio = new Audio(right);
   const wrongAnswerAudio = new Audio(wrong);
 
+  const currentUser = useSelector(selectCurrentUser);
+
   const colorsArray = useSelector(selectColorsArray);
   const random = useSelector(selectRandom);
   const answered = useSelector(selectAnswered);
@@ -39,7 +43,7 @@ const BirdsList = () => {
       if (answered === false) {
         rightAnswerAudio.play();
         dispatch(changeListColor("green", index));
-        dispatch(increaseScore(extraScore));
+        dispatch(updateScoreStart(currentUser.email, extraScore));
         dispatch(setAnswered());
       }
     } else {

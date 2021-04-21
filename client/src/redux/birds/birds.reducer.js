@@ -4,7 +4,6 @@ const INITIAL_STATE = {
   extraScore: 5,
   random: null,
   answered: false,
-  score: 0,
   birdsArray: null,
   currentBirdsArray: null,
   activeBird: null,

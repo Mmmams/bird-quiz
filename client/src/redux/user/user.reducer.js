@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   currentUser: null,
   level: 1,
   message: null,
+  score: 0,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -59,6 +60,36 @@ const userReducer = (state = INITIAL_STATE, action) => {
         level: action.payload,
       };
     case userActionTypes.RESET_LEVEL_FAIL:
+      return {
+        ...state,
+        messgae: action.payload,
+      };
+    case userActionTypes.UPDATE_SCORE_SUCCESS:
+      return {
+        ...state,
+        score: action.payload,
+      };
+    case userActionTypes.UPDATE_SCORE_FAIL:
+      return {
+        ...state,
+        message: action.payload,
+      };
+    case userActionTypes.GET_SCORE_SUCCESS:
+      return {
+        ...state,
+        score: action.payload,
+      };
+    case userActionTypes.GET_SCORE_FAIL:
+      return {
+        ...state,
+        message: action.payload,
+      };
+    case userActionTypes.RESET_SCORE_SUCCESS:
+      return {
+        ...state,
+        score: action.payload,
+      };
+    case userActionTypes.RESET_SCORE_FAIL:
       return {
         ...state,
         messgae: action.payload,

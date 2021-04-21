@@ -32,14 +32,11 @@ const PORT = process.env.PORT || 5000;
 
 async function start() {
   try {
-    await mongoose.connect(
-      "mongodb+srv://Mams:password123456@cluster0.nhk5g.mongodb.net/birdsdb?retryWrites=true&w=majority",
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-      }
-    );
+    await mongoose.connect(process.env.DB, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    });
     app.listen(PORT, () => {
       console.log(`App started on port ${PORT}`);
     });

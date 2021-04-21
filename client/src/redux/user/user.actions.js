@@ -79,3 +79,48 @@ export const setMessage = (message) => ({
   type: userActionTypes.SET_MESSAGE,
   payload: message,
 });
+
+export const updateScoreStart = (email, extraScore) => ({
+  type: userActionTypes.UPDATE_SCORE_START,
+  payload: { email, extraScore },
+});
+
+export const updateScoreSuccess = (score) => ({
+  type: userActionTypes.UPDATE_SCORE_SUCCESS,
+  payload: score,
+});
+
+export const updateScoreFail = (error) => ({
+  type: userActionTypes.UPDATE_SCORE_FAIL,
+  payload: error,
+});
+
+export const getScoreStart = (email) => ({
+  type: userActionTypes.GET_SCORE_START,
+  payload: email,
+});
+
+export const getScoreSuccess = (score) => ({
+  type: userActionTypes.GET_SCORE_SUCCESS,
+  payload: score,
+});
+
+export const getScoreFail = (error) => ({
+  type: userActionTypes.GET_SCORE_FAIL,
+  payload: error,
+});
+
+export const resetScoreStart = (email) => ({
+  type: userActionTypes.RESET_SCORE_START,
+  payload: email,
+});
+
+export const resetScoreSuccess = (score) => ({
+  type: userActionTypes.RESET_SCORE_SUCCESS,
+  payload: score,
+});
+
+export const resetScoreFail = (error) => ({
+  type: userActionTypes.RESET_SCORE_FAIL,
+  payload: error,
+});

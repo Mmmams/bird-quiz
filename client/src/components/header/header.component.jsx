@@ -9,8 +9,11 @@ import "./header.styles.scss";
 
 import { loginSuccess } from "../../redux/user/user.actions";
 
-import { selectScore } from "../../redux/birds/birds.selector";
-import { selectCurrentUser, selectLevel } from "../../redux/user/user.selector";
+import {
+  selectCurrentUser,
+  selectLevel,
+  selectScore,
+} from "../../redux/user/user.selector";
 
 const useStyles = makeStyles((theme) => ({
   root: {

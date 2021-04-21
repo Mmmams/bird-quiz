@@ -47,6 +47,7 @@ router.post(
         email,
         password: hashedPassword,
         currentLevel: 1,
+        currentScore: 0,
       });
       await user.save();
       console.log(user);
@@ -137,6 +138,54 @@ router.post("/resetLevel", async (req, res) => {
       user.currentLevel = 1;
       user.save(user);
       res.json(user.currentLevel);
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Что то пошло не так, попробуйте снова", error: err });
+  }
+});
+
+router.patch("/updateScore", async (req, res) => {
+  try {
+    const { email, extraScore } = req.body;
+    User.findOne({ email }, (err, user) => {
+      if (err) {
+        console.error("ERROR", err);
+      }
+      user.currentScore = user.currentScore + extraScore;
+      user.save(user);
+      res.json(user.currentScore);
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Что то пошло не так, попробуйте снова", error: err });
+  }
+});
+
+router.post("/getScore", async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    res.json(user.currentScore);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Что то пошло не так, попробуйте снова", error: error });
+  }
+});
+
+router.post("/resetScore", async (req, res) => {
+  try {
+    const { email } = req.body;
+    User.findOne({ email }, (err, user) => {
+      if (err) {
+        console.error("ERROR", err);
+      }
+      user.currentScore = 0;
+      user.save(user);
+      res.json(user.currentScore);
     });
   } catch (err) {
     res

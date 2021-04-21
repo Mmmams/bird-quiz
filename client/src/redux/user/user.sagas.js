@@ -15,6 +15,12 @@ import {
   getLevelSuccess,
   resetLevelSuccess,
   resetLevelFail,
+  updateScoreFail,
+  updateScoreSuccess,
+  getScoreFail,
+  getScoreSuccess,
+  resetScoreFail,
+  resetScoreSuccess,
 } from "./user.actions";
 
 export function* userSaga() {
@@ -24,9 +30,82 @@ export function* userSaga() {
     call(onUpdateLevelStart),
     call(onGetLevelStart),
     call(onResetLevelStart),
+    call(onUpdateScoreStart),
+    call(onGetScoreStart),
+    call(onResetScoreStart),
   ]);
 }
 
+export function* onResetScoreStart() {
+  yield takeLatest(userActionTypes.RESET_SCORE_START, resetScoreStart);
+}
+
+export function* resetScoreStart({ payload }) {
+  const email = payload;
+  try {
+    const score = yield fetch(
+      "https://bird-quiz-server.herokuapp.com/resetScore",
+      {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({ email }),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    const currentScore = yield score.json();
+    yield put(resetScoreSuccess(currentScore));
+  } catch (error) {
+    yield put(resetScoreFail(error));
+  }
+}
+
+export function* onGetScoreStart() {
+  yield takeLatest(userActionTypes.GET_SCORE_START, getScoreStart);
+}
+
+export function* getScoreStart({ payload }) {
+  const email = payload;
+  try {
+    const score = yield fetch(
+      "https://bird-quiz-server.herokuapp.com/getScore",
+      {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({ email }),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    const currentScore = yield score.json();
+    yield put(getScoreSuccess(currentScore));
+  } catch (error) {
+    yield put(getScoreFail(error));
+  }
+}
+
+export function* onUpdateScoreStart() {
+  yield takeLatest(userActionTypes.UPDATE_SCORE_START, updateScoreStart);
+}
+
+export function* updateScoreStart({ payload }) {
+  const { email, extraScore } = payload;
+  try {
+    const score = yield fetch(
+      "https://bird-quiz-server.herokuapp.com/updateScore",
+      {
+        method: "PATCH",
+        credentials: "include",
+        body: JSON.stringify({ email, extraScore }),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    const currentScore = yield score.json();
+    yield put(updateScoreSuccess(currentScore));
+  } catch (error) {
+    yield put(updateScoreFail(error));
+  }
+}
+
+//------------------------------------------------------------------------------------
 export function* onResetLevelStart() {
   yield takeLatest(userActionTypes.RESET_LEVEL_START, resetLevelStart);
 }
@@ -90,6 +169,7 @@ export function* updateLevelStart({ payload }) {
       }
     );
     const currentLevel = yield level.json();
+    console.log(currentLevel);
     yield put(updateLevelSuccess(currentLevel));
   } catch (error) {
     yield put(updateLevelFail(error));

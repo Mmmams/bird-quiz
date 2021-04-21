@@ -10,9 +10,12 @@ import {
   fillColorsArrayFucntion,
 } from "../../utils";
 
-import { selectCurrentUser } from "../../redux/user/user.selector";
+import { selectCurrentUser, selectScore } from "../../redux/user/user.selector";
 
-import { resetLevelStart } from "../../redux/user/user.actions.js";
+import {
+  resetLevelStart,
+  resetScoreStart,
+} from "../../redux/user/user.actions.js";
 
 import {
   resetGame,
@@ -21,10 +24,7 @@ import {
   fillColorsArray,
 } from "../../redux/birds/birds.action";
 
-import {
-  selectScore,
-  selectBirdsArray,
-} from "../../redux/birds/birds.selector";
+import { selectBirdsArray } from "../../redux/birds/birds.selector";
 
 const EndGame = () => {
   const dispatch = useDispatch();
@@ -46,6 +46,7 @@ const EndGame = () => {
     dispatch(setRandomValue(randomValue));
 
     dispatch(resetLevelStart(user.email));
+    dispatch(resetScoreStart(user.email));
   };
 
   return (
